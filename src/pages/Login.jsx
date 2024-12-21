@@ -26,10 +26,22 @@ const Login = () => {
           </h1>
           <p className="text-gray-600 mb-6 text-base md:text-xl font-medium">
             Enter Your Email And Password To{" "}
-            <span className="text-blue-500">Login</span>
+            <span className="text-blue-500"> Login</span>
           </p>
           <div className="">
           <form>
+          <div className="form-control mb-4">
+              <label className="label">
+                <span className="label-text">Name</span>
+              </label>
+              <input
+                type="Text"
+                name='name'
+                placeholder="Name"
+                className="border border-blue-500 rounded-xl p-3 outline-none "
+                required
+              />
+            </div>
             <div className="form-control mb-4">
               <label className="label">
                 <span className="label-text">Email</span>
@@ -42,6 +54,7 @@ const Login = () => {
                 required
               />
             </div>
+            
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Password</span>
