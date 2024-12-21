@@ -7,3 +7,8 @@
 body{
   font-family: "Poppins", serif;
 }
+
+ul .active{
+  color: rgb(245, 61, 15);
+  text-decoration: underline;
+}
