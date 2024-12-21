@@ -9,6 +9,8 @@ import { Tooltip } from 'react-tooltip'
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <RouterProvider router={router}></RouterProvider>
-    <Tooltip id="my-tooltip" />
+    <Tooltip id="my-tooltip"
+     className="!bg-blue-500 !text-white !rounded-md !px-4"
+     />
   </StrictMode>
 );

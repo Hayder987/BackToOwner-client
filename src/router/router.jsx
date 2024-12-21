@@ -6,6 +6,8 @@ import LostAndFound from "../pages/LostAndFound";
 import AddLostAndFound from "../pages/AddLostAndFound";
 import ManageMyItem from "../pages/ManageMyItem";
 import AllRecovered from "../pages/AllRecovered";
+import Login from "../pages/Login";
+import Register from "../pages/Register";
 
 
 const router = createBrowserRouter([
@@ -15,6 +17,8 @@ const router = createBrowserRouter([
         errorElement: <ErrorPages></ErrorPages>,
         children:[
             {path:'/', element:<Home></Home>},
+            {path:'/login', element:<Login></Login>},
+            {path:'/register', element:<Register></Register>},
             {path:'/lostandfound', element:<LostAndFound></LostAndFound>},
             {path:'/addlostfound', element:<AddLostAndFound></AddLostAndFound>},
             {path:'/managemyitem', element:<ManageMyItem></ManageMyItem> },

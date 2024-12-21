@@ -1,4 +1,4 @@
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 import logo from "../../assets/images/logo2.png";
 import { LuLogOut } from "react-icons/lu";
 import { IoHome } from "react-icons/io5";
@@ -29,7 +29,7 @@ const NavBar = () => {
           </NavLink>
         </ul>
         <div className="">
-            <button className="py-2 px-4 bg-blue-500 text-white font-semibold">Login</button>
+            <Link to='/login'><button className="py-2 px-4 bg-blue-500 text-white font-semibold">Login</button></Link>
         </div>
         <div className="flex justify-center py-1 px-2 rounded-xl border border-blue-500 items-center gap-3">
           <div className="dropdown">
