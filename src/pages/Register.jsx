@@ -15,6 +15,18 @@ const Register = () => {
           preserveAspectRatio: "xMidYMid meet"
         }
       };
+
+      const registerFormHandler = e =>{
+        e.preventDefault()
+        const form = e.target;
+        const name = form.name.value
+        const email = form.email.value
+        const imgPath = form.imgPath.value
+        const password = form.password.value
+
+        console.log(name, email, imgPath, password)
+      }
+
     return (
         <div className="p-4 lg:p-8">
       <div className="flex p-4 rounded-xl bg-white md:p-12 gap-10 flex-col-reverse lg:flex-row lg:max-w-[1100px] mx-auto">
@@ -29,7 +41,7 @@ const Register = () => {
             <span className="text-blue-500"> Register</span>
           </p>
           <div className="">
-          <form>
+          <form onSubmit={registerFormHandler}>
           <div className="form-control mb-4">
               <label className="label">
                 <span className="label-text">Name</span>
@@ -80,7 +92,7 @@ const Register = () => {
             </div>
             <div className="form-control mt-6 mb-6">
               
-              <input type="submit" value="Login" 
+              <input type="submit" value="Register" 
               className="bg-blue-500 cursor-pointer text-white font-semibold py-3 px-6 rounded-xl" />
             </div>
           </form>
