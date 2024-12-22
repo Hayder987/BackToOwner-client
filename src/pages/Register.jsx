@@ -166,7 +166,7 @@ const Register = () => {
                 <input
                   type="submit"
                   value="Register"
-                  className="bg-blue-500 cursor-pointer text-white font-semibold py-3 px-6 rounded-xl"
+                  className="bg-blue-600 cursor-pointer text-white font-semibold py-3 px-6 rounded-xl"
                 />
               </div>
             </form>

@@ -139,7 +139,7 @@ const Login = () => {
                 <input
                   type="submit"
                   value="Login"
-                  className="bg-blue-500 cursor-pointer text-white font-semibold py-3 px-6 rounded-xl"
+                  className="bg-blue-600 cursor-pointer text-white font-semibold py-3 px-6 rounded-xl"
                 />
               </div>
             </form>

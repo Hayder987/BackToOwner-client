@@ -84,8 +84,8 @@ const NavBar = () => {
                   </div>
                   <ul
                     tabIndex={0}
-                    className="dropdown-content font-medium gap-4 menu top-16 right-0 rounded-xl bg-blue-100/60 
-               z-[1] w-64 max-w-[300px] text-base p-4 shadow"
+                    className="dropdown-content font-medium gap-4 menu top-16 right-0 rounded-xl bg-blue-100 
+                      z-10 w-64 max-w-[300px] text-base p-4 shadow"
                   >
                     <NavLink to="/addlostfound">
                       <li>Add Lost & Found Item</li>
@@ -112,7 +112,7 @@ const NavBar = () => {
             ) : (
               <div className="">
                 <Link to="/login">
-                  <button className="py-3 flex items-center gap-2 px-5 rounded-lg bg-blue-500 text-white font-semibold">
+                  <button className="py-3 flex items-center gap-2 px-5 rounded-lg bg-blue-600 text-white font-semibold">
                     <span className="text-xl"><FiLogIn /></span>
                     Login
                   </button>

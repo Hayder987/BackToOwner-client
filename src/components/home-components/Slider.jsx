@@ -21,7 +21,7 @@ const Slider = ({banner, header, desc}) => {
           <h1 className="mb-4 text-4xl md:text-6xl text-center font-bold text-white">
             {header}
           </h1>
-          <p className="w-full text-center text-gray-300 lg:w-6/12">
+          <p className="w-full text-center text-xl font-medium text-gray-300 lg:w-6/12">
            {desc}
           </p>
         </div>
