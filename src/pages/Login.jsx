@@ -1,6 +1,6 @@
 import { FcGoogle } from "react-icons/fc";
 import logo from "../assets/images/logo2.png";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import loginAnim from "../assets/LottieFiles/login.json";
 import Lottie from "react-lottie";
 import { useState } from "react";
@@ -13,6 +13,8 @@ const Login = () => {
   const upperCase = /^(?=.*[A-Z]).+$/;
   const lowerCase = /^(?=.*[a-z]).+$/;
   const navigate = useNavigate();
+  const {state} = useLocation()
+  const destination = state || '/'
 
   const defaultOptions = {
     loop: true,
@@ -56,6 +58,7 @@ const Login = () => {
           timer: 1500,
         });
         form.reset();
+        navigate(destination)
       })
       .catch((err) => {
         Swal.fire({
@@ -76,7 +79,7 @@ const Login = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-        navigate("/");
+        navigate(destination);
       })
       .catch((err) => {
         Swal.fire({

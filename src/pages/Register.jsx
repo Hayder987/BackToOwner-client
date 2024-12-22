@@ -1,6 +1,6 @@
 import { FcGoogle } from "react-icons/fc";
 import logo from "../assets/images/logo2.png";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import registerAnim from "../assets/LottieFiles/register.json";
 import Lottie from "react-lottie";
 import useAuth from "../hooks/useAuth";
@@ -13,6 +13,8 @@ const Register = () => {
   const upperCase = /^(?=.*[A-Z]).+$/;
   const lowerCase = /^(?=.*[a-z]).+$/;
   const navigate = useNavigate()
+  const {state} = useLocation()
+  const destination = state || '/'
 
   const defaultOptions = {
     loop: true,
@@ -59,7 +61,7 @@ const Register = () => {
           timer: 1500,
         });
         form.reset()
-        navigate('/')
+        navigate(destination)
       })
       .catch((err) => {
         Swal.fire({
@@ -80,7 +82,7 @@ const Register = () => {
       showConfirmButton: false,
       timer: 1500,
     });
-    navigate('/')
+    navigate(destination)
   })
   .catch((err) => {
     Swal.fire({
