@@ -4,24 +4,62 @@ import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
 import banner from '../assets/images/addbanner-2.jpg'
+import useAuth from "../hooks/useAuth";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const AddLostAndFound = () => {
   const { handleImageChange, handleUpload, uploadedUrl } = useUpload();
   const [startDate, setStartDate] = useState(new Date());
+  const {user} = useAuth()
 
-  const postFormHandler = (e) => {
+  const postFormHandler = async(e) => {
     e.preventDefault();
     const form = e.target;
     const title = form.title.value;
+    const type = form.postType.value;
+    const category = form.category.value;
+    const description = form.description.value;
+    const location = form.location.value;
+    const name = form.name.value;
+    const email = form.email.value;
 
-    console.log(title);
+    const postData ={
+      title,
+      status:type,
+      category,
+      description,
+      location,
+      name,
+      email,
+      lostDate:startDate,
+      thumbnail:uploadedUrl
+    }
+
+    await axios.post(`${import.meta.env.VITE_serverUrl}/addItems`, postData)
+    .then(()=>{
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Your Post Send Successfully",
+        showConfirmButton: false,
+        timer: 1500
+      });
+      form.reset()
+      setStartDate(new Date())
+    })
+    .catch(err=>{
+      Swal.fire(`${err}`);
+    })
+
+    
   };
 
 
 
   return (
     <div className="p-4 md:p-8 mb-12">
-      <div className="flex flex-col lg:flex-row gap-8 lg:max-w-[1200px] bg-white mx-auto p-4 md:p-8">
+      <div className="flex shadow-md flex-col lg:flex-row gap-8 lg:max-w-[1200px] bg-white mx-auto p-4 md:p-8">
         {/* form */}
         <div className="w-full lg:w-7/12">
         <h3 className="text-xl md:text-3xl mb-6 font-semibold">Add Lost & Found Item</h3>
@@ -108,7 +146,7 @@ const AddLostAndFound = () => {
                 </label>
                 <input
                   type="text"
-                  name="Location"
+                  name="location"
                   placeholder="where the item was lost"
                   className="input rounded-none input-bordered input-primary"
                   required
@@ -136,13 +174,16 @@ const AddLostAndFound = () => {
                   type="text"
                   name="name"
                   placeholder="Name"
-
+                  readOnly
+                  value={user?.displayName}
                   className="input rounded-none w-full input-bordered input-primary"
                   required
                 />
                 <input
                   type="email"
                   name="email"
+                  value={user?.email}
+                  readOnly
                   placeholder="Email"
                   className="input rounded-none w-full input-bordered input-primary"
                   required
