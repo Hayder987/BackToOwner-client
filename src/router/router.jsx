@@ -9,6 +9,7 @@ import AllRecovered from "../pages/AllRecovered";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import PrivateRoute from "../private/PrivateRoute";
+import DetailsPAge from "../pages/DetailsPAge";
 
 
 const router = createBrowserRouter([
@@ -21,6 +22,7 @@ const router = createBrowserRouter([
             {path:'/login', element:<Login></Login>},
             {path:'/register', element:<Register></Register>},
             {path:'/lostandfound', element:<LostAndFound></LostAndFound>},
+            {path:'/items/:id', element:<PrivateRoute><DetailsPAge></DetailsPAge></PrivateRoute>},
             {path:'/addlostfound', element:<PrivateRoute><AddLostAndFound></AddLostAndFound></PrivateRoute>},
             {path:'/managemyitem', element:<PrivateRoute><ManageMyItem></ManageMyItem></PrivateRoute> },
             {path:'/allrecovered', element:<PrivateRoute><AllRecovered></AllRecovered></PrivateRoute>}
