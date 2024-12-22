@@ -27,7 +27,7 @@ const LostAndFound = () => {
     Swal.fire(`${err}`);
    }
 
-    console.log(postData)
+    
 
     return (
         <div className="py-8 mb-12">

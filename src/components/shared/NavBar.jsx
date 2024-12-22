@@ -79,7 +79,7 @@ const NavBar = () => {
                       referrerPolicy="no-referrer"
                       src={user?.photoURL}
                       alt=""
-                      className="w-10 h-10 rounded-full"
+                      className="w-8 h-8 rounded-full"
                     />
                   </div>
                   <ul
@@ -103,7 +103,7 @@ const NavBar = () => {
                     onClick={logOutHandler}
                     data-tooltip-id="my-tooltip"
                     data-tooltip-content="Log-Out!"
-                    className="text-4xl text-blue-500"
+                    className="text-3xl text-blue-500"
                   >
                     <LuLogOut />
                   </button>
