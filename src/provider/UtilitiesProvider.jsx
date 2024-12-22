@@ -19,11 +19,6 @@ const UtilitiesProvider = ({ children }) => {
 
   const handleUpload = async () => {
     if (!selectedImage) {
-      Swal.fire({
-        text: "Please select an image to upload!",
-        icon: "info",
-        timer: 1500,
-      });
       return;
     }
 

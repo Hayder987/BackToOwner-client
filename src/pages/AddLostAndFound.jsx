@@ -23,6 +23,7 @@ const AddLostAndFound = () => {
     const location = form.location.value;
     const name = form.name.value;
     const email = form.email.value;
+    const today = new Date()
 
     const postData ={
       title,
@@ -33,7 +34,8 @@ const AddLostAndFound = () => {
       name,
       email,
       lostDate:startDate,
-      thumbnail:uploadedUrl
+      thumbnail:uploadedUrl,
+      postedDate : today
     }
 
     await axios.post(`${import.meta.env.VITE_serverUrl}/addItems`, postData)
@@ -88,7 +90,7 @@ const AddLostAndFound = () => {
                     required
                     accept="image/*"
                     onChange={handleImageChange}
-                    onBlur={() => handleUpload()}
+                    onMouseLeave={() => handleUpload()}
                     className="file-input rounded-none file-input-primary w-full "
                   />
                 </div>
