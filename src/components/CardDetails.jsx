@@ -1,8 +1,12 @@
+import DatePicker from "react-datepicker";
 import useAuth from "../hooks/useAuth";
 import { format } from "date-fns";
+import { useState } from "react";
 
 const CardDetails = ({ post }) => {
   const { user } = useAuth();
+  const [startDate, setStartDate] = useState(new Date());
+  const [pickLocation, setpickLocation] = useState('')
 
   const {
     title,
@@ -15,13 +19,27 @@ const CardDetails = ({ post }) => {
     lostDate,
     thumbnail,
     postedDate,
+    _id
   } = post || {};
 
+  const submitFormHandler = e =>{
+    e.preventDefault();
+    const dataInfo ={
+        postId:_id,
+        pickLocation,
+        pickDate:startDate,
+        name:user?.displayName,
+        email:user?.email,
+        image:user?.photoURL
+    }
+
+  }
+
   return (
-    <div className="lg:max-w-[1100px] flex gap-8 flex-col lg:flex-row mx-auto bg-white p-2 md:p-8">
+    <div className="lg:max-w-[1100px] flex gap-8 flex-col lg:flex-row mx-auto bg-white p-2 md:p-8 py-12 md:py-16">
       {/* img */}
       <div className="lg:w-1/2">
-        <img src={thumbnail} alt="" className="w-full h-full object-cover" />
+        <img src={thumbnail} alt="" className="w-full rounded-lg h-full object-cover" />
       </div>
       {/* text */}
       <div className="lg:w-1/2">
@@ -74,40 +92,94 @@ const CardDetails = ({ post }) => {
           <span className="text-gray-600">{location}</span>
         </p>
         {status === "found" && (
-          <button 
-          onClick={() => document.getElementById("my_modal_5").showModal()}
-          className="py-3 px-6 rounded-lg w-full bg-blue-600 text-white font-semibold">
-            
+          <button
+            onClick={() => document.getElementById("my_modal_5").showModal()}
+            className="py-3 px-6 rounded-lg w-full bg-blue-600 text-white font-semibold"
+          >
             This is Mine!
           </button>
         )}
         {status === "lost" && (
-          <button 
-          onClick={() => document.getElementById("my_modal_5").showModal()}
-          className="py-3 px-6 rounded-lg w-full bg-blue-600 text-white font-semibold">
+          <button
+            onClick={() => document.getElementById("my_modal_5").showModal()}
+            className="py-3 px-6 rounded-lg w-full bg-blue-600 text-white font-semibold"
+          >
             Found This!
           </button>
         )}
         {status === "recovered" && (
-          <button 
-          disabled
-          className="py-3 hover:disabled:cursor-not-allowed px-6 w-full rounded-lg bg-green-600 text-white font-semibold">
-            
+          <button
+            disabled
+            className="py-3 hover:disabled:cursor-not-allowed px-6 w-full rounded-lg bg-green-600 text-white font-semibold"
+          >
             recovered!
           </button>
         )}
       </div>
       {/* modal */}
-      <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
-        <div className="modal-box">
-          <h3 className="font-bold text-lg">Hello!</h3>
-          <p className="py-4">
-            Press ESC key or click the button below to close
-          </p>
-          <div className="modal-action">
-            <form method="dialog">
+      <dialog id="my_modal_5" className="modal  modal-bottom sm:modal-middle">
+        <div className="modal-box ">
+            <h3 className="text-xl font-bold text-center my-4">Give Your Information</h3>
+          <div className="p-6">
+            <form onSubmit={submitFormHandler} className="flex flex-col gap-4">
+              <div className="form-control w-full">
+                <label className="label">
+                  <span className="label-text">Recovered location</span>
+                </label>
+                <input
+                  type="text"
+                  onChange={(e)=>setpickLocation(e.target.value)}
+                  name="location"
+                  placeholder="where the item was lost"
+                  className="input rounded-lg input-bordered input-primary"
+                  required
+                />
+              </div>
+              <div className="form-control w-full">
+                <label className="label">
+                  <span className="label-text">Pick Date</span>
+                </label>
+                <div className="border rounded-lg border-blue-600">
+                  <DatePicker
+                    selected={startDate}
+                    className="p-3 w-full rounded-lg outline-lg"
+                    onChange={(date) => setStartDate(date)}
+                  />
+                </div>
+              </div>
+              <div className="form-control w-full">
+                <label className="label">
+                  <span className="label-text">Name</span>
+                </label>
+                <input
+                  type="text"
+                  readOnly
+                  value={user?.displayName}
+                  className="input rounded-lg w-full input-bordered input-primary"
+                  required
+                />
+              </div>
+              <div className="form-control w-full">
+                <label className="label">
+                  <span className="label-text">Email</span>
+                </label>
+                <input
+                  type="email"
+                  readOnly
+                  value={user?.email}
+                  className="input rounded-lg w-full input-bordered input-primary"
+                  required
+                />
+              </div>
               
-              <button className="btn">Close</button>
+              <button 
+              onClick={() => {
+                pickLocation?
+                document.getElementById("my_modal_5").close():''
+              }}
+              className="w-full my-6 rounded-lg bg-blue-600 text-white py-3 px-6">
+                Submit</button>
+              
             </form>
           </div>
         </div>
@@ -117,3 +189,5 @@ const CardDetails = ({ post }) => {
 };
 
 export default CardDetails;
+
+
