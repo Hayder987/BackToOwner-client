@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 import { useState } from "react";
 
 const Register = () => {
-  const { registerUser, updateUser } = useAuth();
+  const { registerUser, updateUser, googleLogin } = useAuth();
   const [errorMesage, setErrorMessage] = useState("");
   const upperCase = /^(?=.*[A-Z]).+$/;
   const lowerCase = /^(?=.*[a-z]).+$/;
@@ -48,9 +48,9 @@ const Register = () => {
     }
 
     registerUser(email, password)
-      .then((res) => {
+      .then(() => {
         updateUser(name, imgPath)
-        console.log(res)
+       
         Swal.fire({
           position: "top-middle",
           icon: "success",
@@ -59,6 +59,7 @@ const Register = () => {
           timer: 1500,
         });
         form.reset()
+        navigate('/')
       })
       .catch((err) => {
         Swal.fire({
@@ -68,6 +69,28 @@ const Register = () => {
         });
       });
   };
+
+ const googleLoginHandler = ()=>{
+  googleLogin()
+  .then(() => {
+    Swal.fire({
+      position: "top-middle",
+      icon: "success",
+      title: "User Registration SuccessFully!",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+    navigate('/')
+  })
+  .catch((err) => {
+    Swal.fire({
+      title: err.message,
+      icon: "error",
+      draggable: true,
+    });
+  });
+ }
+
 
   return (
     <div className="p-4 lg:p-8">
@@ -147,7 +170,7 @@ const Register = () => {
             </form>
             <div className="divider my-6">Or, Login with</div>
             <div className="flex justify-center mt-4">
-              <button className="flex border font-semibold border-blue-500 w-full py-3 px-6 rounded-xl justify-center items-center gap-4">
+              <button onClick={googleLoginHandler} className="flex border font-semibold border-blue-500 w-full py-3 px-6 rounded-xl justify-center items-center gap-4">
                 <span className="text-2xl">
                   <FcGoogle />
                 </span>

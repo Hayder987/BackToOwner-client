@@ -8,7 +8,7 @@ import useAuth from "../hooks/useAuth";
 import Swal from "sweetalert2";
 
 const Login = () => {
-  const { loginUser } = useAuth();
+  const { loginUser, googleLogin } = useAuth();
   const [errorMesage, setErrorMessage] = useState("");
   const upperCase = /^(?=.*[A-Z]).+$/;
   const lowerCase = /^(?=.*[a-z]).+$/;
@@ -56,6 +56,27 @@ const Login = () => {
           timer: 1500,
         });
         form.reset();
+      })
+      .catch((err) => {
+        Swal.fire({
+          title: err.message,
+          icon: "error",
+          draggable: true,
+        });
+      });
+  };
+
+  const googleLoginHandler = () => {
+    googleLogin()
+      .then(() => {
+        Swal.fire({
+          position: "top-middle",
+          icon: "success",
+          title: "User Registration SuccessFully!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        navigate("/");
       })
       .catch((err) => {
         Swal.fire({
@@ -121,7 +142,10 @@ const Login = () => {
             </form>
             <div className="divider my-6">Or, Login with</div>
             <div className="flex justify-center mt-4">
-              <button className="flex border font-semibold border-blue-500 w-full py-3 px-6 rounded-xl justify-center items-center gap-4">
+              <button
+                onClick={googleLoginHandler}
+                className="flex border font-semibold border-blue-500 w-full py-3 px-6 rounded-xl justify-center items-center gap-4"
+              >
                 <span className="text-2xl">
                   <FcGoogle />
                 </span>
