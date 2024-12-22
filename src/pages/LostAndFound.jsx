@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import LoaderSpinner from "../components/LoaderSpinner";
 import Swal from "sweetalert2";
+import Card from "../components/Card";
 
 
 const LostAndFound = () => {
@@ -29,11 +30,16 @@ const LostAndFound = () => {
     console.log(postData)
 
     return (
-        <div>
+        <div className="py-8 mb-12">
             {
                 loading?<LoaderSpinner></LoaderSpinner>:
-                <div className="">
-
+                <div className="container shadow-md grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mx-auto bg-white p-4">
+                 {
+                    postData.map(post=> <Card 
+                        key={post._id}
+                        post={post}
+                        ></Card>)
+                 } 
                 </div>
             }
             
