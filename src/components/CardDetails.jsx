@@ -2,8 +2,10 @@ import DatePicker from "react-datepicker";
 import useAuth from "../hooks/useAuth";
 import { format } from "date-fns";
 import { useState } from "react";
+import axios from "axios";
+import Swal from "sweetalert2";
 
-const CardDetails = ({ post }) => {
+const CardDetails = ({ post , setLoad, load}) => {
   const { user } = useAuth();
   const [startDate, setStartDate] = useState(new Date());
   const [pickLocation, setpickLocation] = useState('')
@@ -22,7 +24,7 @@ const CardDetails = ({ post }) => {
     _id
   } = post || {};
 
-  const submitFormHandler = e =>{
+  const submitFormHandler = async e =>{
     e.preventDefault();
     const dataInfo ={
         postId:_id,
@@ -32,7 +34,23 @@ const CardDetails = ({ post }) => {
         email:user?.email,
         image:user?.photoURL
     }
-
+    try{
+      await axios.post(`${import.meta.env.VITE_serverUrl}/addData`, dataInfo)
+      .then(()=>{
+        setLoad(!load)
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Your Information Saved SuccessFully",
+          showConfirmButton: false,
+          timer: 1500
+        });
+      })
+    }
+    catch(err){
+      Swal.fire(`${err}`);
+    }
+   
   }
 
   return (
@@ -142,7 +160,7 @@ const CardDetails = ({ post }) => {
                 <div className="border rounded-lg border-blue-600">
                   <DatePicker
                     selected={startDate}
-                    className="p-3 w-full rounded-lg outline-lg"
+                    className="p-3 w-full rounded-lg outline-none"
                     onChange={(date) => setStartDate(date)}
                   />
                 </div>
@@ -167,6 +185,18 @@ const CardDetails = ({ post }) => {
                   type="email"
                   readOnly
                   value={user?.email}
+                  className="input rounded-lg w-full input-bordered input-primary"
+                  required
+                />
+              </div>
+              <div className="form-control w-full">
+                <label className="label">
+                  <span className="label-text">ImgPath</span>
+                </label>
+                <input
+                  type="text"
+                  readOnly
+                  value={user?.photoURL}
                   className="input rounded-lg w-full input-bordered input-primary"
                   required
                 />

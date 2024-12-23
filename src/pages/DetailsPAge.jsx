@@ -10,11 +10,12 @@ const DetailsPAge = () => {
     const {id} = useParams();
     const [post, setPost] = useState({})
     const [loading, setLoading]= useState(true)
+    const [load, setLoad] = useState(false)
 
    try{
     useEffect(()=>{
         fetchData()
-        },[])
+        },[load])
     
         const fetchData = ()=>{
             axios.get(`${import.meta.env.VITE_serverUrl}/item/${id}`)
@@ -29,13 +30,17 @@ const DetailsPAge = () => {
    }
 
 
-
     return (
         <div>
            {
             loading?<LoaderSpinner></LoaderSpinner>:
             <div className="p-6 md:p-12 ">
-             <CardDetails post={post}></CardDetails>
+             <CardDetails 
+             post={post}
+             load={load}
+             setLoad={setLoad}
+
+             ></CardDetails>
             </div>
            } 
         </div>
