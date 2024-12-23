@@ -130,7 +130,7 @@ const UpdatePage = () => {
                     defaultValue={post.status}
                     className="select select-primary select-bordered w-full "
                   >
-                    <option value={"recovered"}>Recovered</option>
+                    <option value={"recovered"} disabled>Recovered</option>
                     <option value={"lost"}>Lost</option>
                     <option value={"found"}>Found</option>
                   </select>

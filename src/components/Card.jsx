@@ -23,8 +23,8 @@ const Card = ({post}) => {
            <div className="w-1/2">
             <p className="text-sm font-semibold mb-2 text-gray-700">Lost Date: {format(new Date(lostDate), "PP")}</p>
             <h3 className="font-bold mb-2">{title}</h3>
-            <p className="text-sm font-medium mb-2">{description.slice(0,50)}...</p>
-            <h3 className="font-bold mb-2">{location}</h3>
+            <p className="text-sm mb-2">{description.slice(0,50)}...</p>
+            <h3 className="font-semibold text-sm mb-2">{location}</h3>
             <p className='mb-3'>
             <span className="font-bold">Status: </span>
             <span className={`${status==='recovered'?'text-green-600 font-semibold':'text-gray-600'}`}>{status}</span>
