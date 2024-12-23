@@ -14,10 +14,10 @@ const Card = ({post}) => {
       } = post || {}
     
     return (
-        <div className="flex justify-center gap-4  border p-2">
+        <div className="flex justify-center gap-4  border p-2 rounded-lg">
             {/* img */}
            <div className="w-1/2">
-            <img src={thumbnail} alt="" className="w-full h-full object-cover" />
+            <img src={thumbnail} alt="" className="w-full h-full object-cover rounded-lg" />
            </div> 
            {/* text */}
            <div className="w-1/2">
@@ -29,7 +29,7 @@ const Card = ({post}) => {
             <span className="font-bold">Status: </span>
             <span className={`${status==='recovered'?'text-green-600 font-semibold':'text-gray-600'}`}>{status}</span>
           </p>
-            <Link to={`/items/${_id}`}><button className="py-2 px-4 bg-blue-600 text-white">View Details</button></Link>
+            <Link to={`/items/${_id}`}><button className="py-2 rounded-lg px-4 bg-blue-600 text-white">View Details</button></Link>
 
            </div>
         </div>

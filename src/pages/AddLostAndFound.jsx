@@ -67,7 +67,7 @@ const AddLostAndFound = () => {
 
   return (
     <div className="p-4 md:p-8 mb-12">
-      <div className="flex shadow-md flex-col lg:flex-row gap-8 lg:max-w-[1200px] bg-white mx-auto p-4 md:p-8">
+      <div className="flex shadow-md flex-col rounded-lg lg:flex-row gap-8 lg:max-w-[1200px] bg-white mx-auto p-4 md:p-8">
         {/* form */}
         <div className="w-full lg:w-7/12">
         <h3 className="text-xl md:text-3xl mb-6 font-semibold">Add Lost & Found Item</h3>
@@ -82,7 +82,7 @@ const AddLostAndFound = () => {
                   type="text"
                   name="title"
                   placeholder="Title"
-                  className="input rounded-none input-bordered input-primary"
+                  className="input input-bordered input-primary"
                   required
                 />
               </div>
@@ -97,7 +97,7 @@ const AddLostAndFound = () => {
                     accept="image/*"
                     onChange={handleImageChange}
                     onMouseLeave={() => handleUpload()}
-                    className="file-input rounded-none file-input-primary w-full "
+                    className="file-input file-input-primary w-full "
                   />
                 </div>
               </div>
@@ -110,7 +110,7 @@ const AddLostAndFound = () => {
                 <select
                   name="postType"
                   required
-                  className="select rounded-none select-primary select-bordered w-full "
+                  className="select select-primary select-bordered w-full "
                 >
                   <option disabled>Post Type</option>
                   <option value="lost">Lost</option>
@@ -124,7 +124,7 @@ const AddLostAndFound = () => {
                 <select
                   name="category"
                   required
-                  className="select rounded-none select-bordered select-primary w-full"
+                  className="select select-bordered select-primary w-full"
                 >
                   <option disabled>
                     Category
@@ -142,7 +142,7 @@ const AddLostAndFound = () => {
               </label>
               <textarea
                 name="description"
-                className="textarea rounded-none resize-none textarea-primary"
+                className="textarea resize-none textarea-primary"
                 placeholder="Description"
                 required
               ></textarea>
@@ -164,7 +164,7 @@ const AddLostAndFound = () => {
                 <label className="label">
                   <span className="label-text">Date Lost</span>
                 </label>
-                <div className="border border-blue-600">
+                <div className="border rounded-lg border-blue-600">
                   <DatePicker
                     selected={startDate}
                     className="p-3 w-full outline-none"
@@ -184,7 +184,7 @@ const AddLostAndFound = () => {
                   placeholder="Name"
                   readOnly
                   value={user?.displayName}
-                  className="input rounded-none w-full input-bordered input-primary"
+                  className="input w-full input-bordered input-primary"
                   required
                 />
                 <input
@@ -193,18 +193,18 @@ const AddLostAndFound = () => {
                   value={user?.email}
                   readOnly
                   placeholder="Email"
-                  className="input rounded-none w-full input-bordered input-primary"
+                  className="input w-full input-bordered input-primary"
                   required
                 />
               </div>
             </div>
 
-            <input type="submit" value="Add Post" className="w-full bg-blue-600 text-white py-3 px-6" />
+            <input type="submit" value="Add Post" className="w-full rounded-lg bg-blue-600 text-white py-3 px-6" />
           </form>
         </div>
         {/* banner */}
         <div className="w-full hidden lg:flex lg:w-5/12">
-        <img src={uploadedUrl?uploadedUrl:banner} alt="" className={`w-full ${uploadedUrl?'h-[100%]':"h-[85%]"}`} />
+        <img src={uploadedUrl?uploadedUrl:banner} alt="" className={`w-full rounded-lg ${uploadedUrl?'h-[100%]':"h-[85%]"}`} />
         </div>
       </div>
     </div>

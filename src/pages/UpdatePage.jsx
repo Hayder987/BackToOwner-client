@@ -5,14 +5,17 @@ import "react-datepicker/dist/react-datepicker.css";
 import useAuth from "../hooks/useAuth";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
+import LoaderSpinner from "../components/LoaderSpinner";
 
 const UpdatePage = () => {
   const { id } = useParams();
   const [post, setPost] = useState({});
   const { user } = useAuth();
-  const { handleImageChange, handleUpload, uploadedUrl } = useUpload();
+  const { handleImageChange, handleUpload, uploadedUrl,setUploadedUrl, setSelectedImage } = useUpload();
   const [startDate, setStartDate] = useState(new Date());
+  const [loading, setLoading] = useState(true)
+  const navigate = useNavigate()
 
 
   useEffect(() => {
@@ -22,7 +25,7 @@ const UpdatePage = () => {
           .then((res) => {
             setStartDate(res.data.lostDate)
             setPost(res.data);
-            
+            setLoading(false)
           });
       };
     fetchData();
@@ -53,13 +56,32 @@ const UpdatePage = () => {
     };
 
     console.log(updateData)
-
+    await axios
+      .patch(`${import.meta.env.VITE_serverUrl}/updateItems/${id}`, updateData)
+      .then(() => {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Your Post Update Successfully",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        form.reset();
+        navigate('/managemyitem')
+        setUploadedUrl()
+        setSelectedImage(null)
+      })
+      .catch((err) => {
+        Swal.fire(`${err}`);
+      });
    
   };
 
   return (
     <div className="p-4 md:p-8 mb-12">
-      <div className="flex shadow-md flex-col lg:flex-row gap-8 lg:max-w-[1200px] bg-white mx-auto p-4 md:p-8">
+      {
+        loading? <LoaderSpinner></LoaderSpinner>:
+        <div className="flex shadow-md flex-col rounded-lg lg:flex-row gap-8 lg:max-w-[1200px] bg-white mx-auto p-4 md:p-8">
         {/* form */}
         <div className="w-full lg:w-7/12">
           <h3 className="text-xl md:text-3xl mb-6 font-semibold">
@@ -77,7 +99,7 @@ const UpdatePage = () => {
                   name="title"
                   defaultValue={post?.title}
                   placeholder="Title"
-                  className="input rounded-none input-bordered input-primary"
+                  className="input input-bordered input-primary"
                   
                 />
               </div>
@@ -91,7 +113,7 @@ const UpdatePage = () => {
                     accept="image/*"
                     onChange={handleImageChange}
                     onMouseLeave={() => handleUpload()}
-                    className="file-input rounded-none file-input-primary w-full "
+                    className="file-input file-input-primary w-full "
                   />
                 </div>
               </div>
@@ -106,11 +128,11 @@ const UpdatePage = () => {
                   <select
                     name="postType"
                     defaultValue={post.status}
-                    className="select rounded-none select-primary select-bordered w-full "
+                    className="select select-primary select-bordered w-full "
                   >
+                    <option value={"recovered"}>Recovered</option>
                     <option value={"lost"}>Lost</option>
                     <option value={"found"}>Found</option>
-                    <option value={"recovered"}>Recovered</option>
                   </select>
                 )}
               </div>
@@ -122,7 +144,7 @@ const UpdatePage = () => {
                   <select
                     name="category"
                     defaultValue={post?.category}
-                    className="select rounded-none select-bordered select-primary w-full"
+                    className="select select-bordered select-primary w-full"
                   >
                     <option value="pets">Pets</option>
                     <option value="documents">Documents</option>
@@ -139,7 +161,7 @@ const UpdatePage = () => {
               <textarea
                 name="description"
                 defaultValue={post?.description}
-                className="textarea rounded-none resize-none textarea-primary"
+                className="textarea resize-none textarea-primary"
                 placeholder="Description"
               ></textarea>
             </div>
@@ -153,17 +175,17 @@ const UpdatePage = () => {
                   name="location"
                   defaultValue={post?.location}
                   placeholder="where the item was lost"
-                  className="input rounded-none input-bordered input-primary"
+                  className="input input-bordered input-primary"
                 />
               </div>
               <div className="form-control w-full">
                 <label className="label">
                   <span className="label-text">Date Lost</span>
                 </label>
-                <div className="border border-blue-600">
+                <div className="border rounded-lg border-blue-600">
                   <DatePicker
                     selected={startDate}
-                    className="p-3 w-full outline-none"
+                    className="p-3 w-full rounded-lg outline-none"
                     onChange={(date) => setStartDate(date)}
                   />
                 </div>
@@ -180,7 +202,7 @@ const UpdatePage = () => {
                   placeholder="Name"
                   readOnly
                   value={user?.displayName}
-                  className="input rounded-none w-full input-bordered input-primary"
+                  className="input  w-full input-bordered input-primary"
                 />
                 <input
                   type="email"
@@ -188,7 +210,7 @@ const UpdatePage = () => {
                   value={user?.email}
                   readOnly
                   placeholder="Email"
-                  className="input rounded-none w-full input-bordered input-primary"
+                  className="input  w-full input-bordered input-primary"
                 />
               </div>
             </div>
@@ -196,7 +218,7 @@ const UpdatePage = () => {
             <input
               type="submit"
               value="Update Post"
-              className="w-full bg-blue-600 text-white py-3 px-6"
+              className="w-full rounded-lg bg-blue-600 text-white py-3 px-6"
             />
           </form>
         </div>
@@ -205,10 +227,11 @@ const UpdatePage = () => {
           <img
             src={uploadedUrl ? uploadedUrl : post?.thumbnail}
             alt=""
-            className="w-full h-[100%] "
+            className="w-full h-[100%] rounded-lg "
           />
         </div>
       </div>
+      }
     </div>
   );
 };
