@@ -9,12 +9,13 @@ import { RiDeleteBin5Fill } from "react-icons/ri";
 import LoaderSpinner from "../components/LoaderSpinner";
 import noData from '../assets/LottieFiles/nodata.json'
 import Lottie from "react-lottie";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 const ManageMyItem = () => {
   const { user } = useAuth();
   const [postData, setPostData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate()
 
   const defaultOptions = {
     loop: true,
@@ -125,6 +126,7 @@ const ManageMyItem = () => {
                   <td>{format(new Date(post?.postedDate), "PP")}</td>
                   <td className="flex justify-start gap-3">
                     <button
+                      onClick={()=> navigate(`/updateItems/${post?._id}`)}
                       data-tooltip-id="my-tooltip"
                       data-tooltip-content="Edit"
                       className="bg-blue-600 text-white p-2 rounded-md text-xl"

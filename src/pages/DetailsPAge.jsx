@@ -14,9 +14,6 @@ const DetailsPAge = () => {
 
    try{
     useEffect(()=>{
-        fetchData()
-        },[load])
-    
         const fetchData = ()=>{
             axios.get(`${import.meta.env.VITE_serverUrl}/item/${id}`)
             .then(res=>{
@@ -24,6 +21,10 @@ const DetailsPAge = () => {
                 setLoading(false)
             })
         }
+        fetchData()
+        },[load, id])
+    
+       
    }
    catch(err){
      Swal.fire(`${err}`);

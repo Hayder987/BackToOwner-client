@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 const UtilitiesProvider = ({ children }) => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [uploadedUrl, setUploadedUrl] = useState("");
-  console.log(uploadedUrl);
+
 
   const IMGBB_API_KEY = import.meta.env.VITE_ImgBBApiKey;
 
@@ -44,7 +44,9 @@ const UtilitiesProvider = ({ children }) => {
   const utilitiesInfo = {
     handleImageChange,
     handleUpload,
-    uploadedUrl
+    uploadedUrl,
+    setUploadedUrl,
+    setSelectedImage
 
   };
   return (

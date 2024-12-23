@@ -2,22 +2,34 @@ import { useEffect, useState } from "react";
 import useUpload from "../hooks/useUpload";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import banner from '../assets/images/addbanner-2.jpg'
 import useAuth from "../hooks/useAuth";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { useParams } from "react-router";
 
-const AddLostAndFound = () => {
-  const { handleImageChange, handleUpload, uploadedUrl,setUploadedUrl, setSelectedImage } = useUpload();
+const UpdatePage = () => {
+  const { id } = useParams();
+  const [post, setPost] = useState({});
+  const { user } = useAuth();
+  const { handleImageChange, handleUpload, uploadedUrl } = useUpload();
   const [startDate, setStartDate] = useState(new Date());
-  const {user} = useAuth()
-  
-  useEffect(()=>{
-    setUploadedUrl('')
-    setSelectedImage(null)
-  },[setUploadedUrl, setSelectedImage])
 
-  const postFormHandler = async(e) => {
+
+  useEffect(() => {
+    const fetchData = async () => {
+        await axios
+          .get(`${import.meta.env.VITE_serverUrl}/item/${id}`)
+          .then((res) => {
+            setStartDate(res.data.lostDate)
+            setPost(res.data);
+            
+          });
+      };
+    fetchData();
+  }, [post?.lostDate, id]);
+
+ 
+  const updateFormHandler = async (e) => {
     e.preventDefault();
     const form = e.target;
     const title = form.title.value;
@@ -27,51 +39,33 @@ const AddLostAndFound = () => {
     const location = form.location.value;
     const name = form.name.value;
     const email = form.email.value;
-    const today = new Date()
 
-    const postData ={
+    const updateData = {
       title,
-      status:type,
+      status: type,
       category,
       description,
       location,
       name,
       email,
-      lostDate:startDate,
-      thumbnail:uploadedUrl,
-      postedDate : today
-    }
+      lostDate: startDate,
+      thumbnail: uploadedUrl?uploadedUrl:post?.thumbnail      ,
+    };
 
-    await axios.post(`${import.meta.env.VITE_serverUrl}/addItems`, postData)
-    .then(()=>{
-      Swal.fire({
-        position: "top-end",
-        icon: "success",
-        title: "Your Post Send Successfully",
-        showConfirmButton: false,
-        timer: 1500
-      });
-      form.reset()
-      setStartDate(new Date())
-      setUploadedUrl('')
-      setSelectedImage(null)
-    })
-    .catch(err=>{
-      Swal.fire(`${err}`);
-    })
+    console.log(updateData)
 
-    
+   
   };
-
-
 
   return (
     <div className="p-4 md:p-8 mb-12">
       <div className="flex shadow-md flex-col lg:flex-row gap-8 lg:max-w-[1200px] bg-white mx-auto p-4 md:p-8">
         {/* form */}
         <div className="w-full lg:w-7/12">
-        <h3 className="text-xl md:text-3xl mb-6 font-semibold">Add Lost & Found Item</h3>
-          <form className="flex flex-col gap-6" onSubmit={postFormHandler}>
+          <h3 className="text-xl md:text-3xl mb-6 font-semibold">
+            Update {post?.title}
+          </h3>
+          <form className="flex flex-col gap-6" onSubmit={updateFormHandler}>
             {/* title and images */}
             <div className="flex flex-col md:flex-row justify-center gap-6">
               <div className="form-control w-full">
@@ -81,9 +75,10 @@ const AddLostAndFound = () => {
                 <input
                   type="text"
                   name="title"
+                  defaultValue={post?.title}
                   placeholder="Title"
                   className="input rounded-none input-bordered input-primary"
-                  required
+                  
                 />
               </div>
               <div className="form-control w-full">
@@ -93,7 +88,6 @@ const AddLostAndFound = () => {
                 <div className="flex flex-col lg:flex-row gap-4">
                   <input
                     type="file"
-                    required
                     accept="image/*"
                     onChange={handleImageChange}
                     onMouseLeave={() => handleUpload()}
@@ -107,33 +101,35 @@ const AddLostAndFound = () => {
                 <label className="label">
                   <span className="label-text">Post Type</span>
                 </label>
-                <select
-                  name="postType"
-                  required
-                  className="select rounded-none select-primary select-bordered w-full "
-                >
-                  <option disabled>Post Type</option>
-                  <option value="lost">Lost</option>
-                  <option value="found">Found</option>
-                </select>
+
+                {post?.status && (
+                  <select
+                    name="postType"
+                    defaultValue={post.status}
+                    className="select rounded-none select-primary select-bordered w-full "
+                  >
+                    <option value={"lost"}>Lost</option>
+                    <option value={"found"}>Found</option>
+                    <option value={"recovered"}>Recovered</option>
+                  </select>
+                )}
               </div>
               <div className="form-control w-full">
                 <label className="label">
                   <span className="label-text">Category</span>
                 </label>
-                <select
-                  name="category"
-                  required
-                  className="select rounded-none select-bordered select-primary w-full"
-                >
-                  <option disabled>
-                    Category
-                  </option>
-                  <option value="pets">Pets</option>
-                  <option value="documents">Documents</option>
-                  <option value="gadgets">Gadgets</option>
-                  <option value="homeitems">Home Items</option>
-                </select>
+                {post?.category && (
+                  <select
+                    name="category"
+                    defaultValue={post?.category}
+                    className="select rounded-none select-bordered select-primary w-full"
+                  >
+                    <option value="pets">Pets</option>
+                    <option value="documents">Documents</option>
+                    <option value="gadgets">Gadgets</option>
+                    <option value="homeitems">Home Items</option>
+                  </select>
+                )}
               </div>
             </div>
             <div className="form-control w-full">
@@ -142,9 +138,9 @@ const AddLostAndFound = () => {
               </label>
               <textarea
                 name="description"
+                defaultValue={post?.description}
                 className="textarea rounded-none resize-none textarea-primary"
                 placeholder="Description"
-                required
               ></textarea>
             </div>
             <div className="flex flex-col md:flex-row justify-center gap-6">
@@ -155,9 +151,9 @@ const AddLostAndFound = () => {
                 <input
                   type="text"
                   name="location"
+                  defaultValue={post?.location}
                   placeholder="where the item was lost"
                   className="input rounded-none input-bordered input-primary"
-                  required
                 />
               </div>
               <div className="form-control w-full">
@@ -185,7 +181,6 @@ const AddLostAndFound = () => {
                   readOnly
                   value={user?.displayName}
                   className="input rounded-none w-full input-bordered input-primary"
-                  required
                 />
                 <input
                   type="email"
@@ -194,21 +189,28 @@ const AddLostAndFound = () => {
                   readOnly
                   placeholder="Email"
                   className="input rounded-none w-full input-bordered input-primary"
-                  required
                 />
               </div>
             </div>
 
-            <input type="submit" value="Add Post" className="w-full bg-blue-600 text-white py-3 px-6" />
+            <input
+              type="submit"
+              value="Update Post"
+              className="w-full bg-blue-600 text-white py-3 px-6"
+            />
           </form>
         </div>
         {/* banner */}
         <div className="w-full hidden lg:flex lg:w-5/12">
-        <img src={uploadedUrl?uploadedUrl:banner} alt="" className={`w-full ${uploadedUrl?'h-[100%]':"h-[85%]"}`} />
+          <img
+            src={uploadedUrl ? uploadedUrl : post?.thumbnail}
+            alt=""
+            className="w-full h-[100%] "
+          />
         </div>
       </div>
     </div>
   );
 };
 
-export default AddLostAndFound;
+export default UpdatePage;
