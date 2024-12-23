@@ -21,7 +21,7 @@ const Login = () => {
     autoplay: true,
     animationData: loginAnim,
     rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice",
+    preserveAspectRatio: "xMidYMid slice",
     },
   };
 
@@ -53,7 +53,7 @@ const Login = () => {
         Swal.fire({
           position: "top-middle",
           icon: "success",
-          title: "User Registration SuccessFully!",
+          title: "User Login SuccessFully!",
           showConfirmButton: false,
           timer: 1500,
         });
@@ -91,7 +91,7 @@ const Login = () => {
   };
 
   return (
-    <div className="p-4 lg:p-8">
+    <div className="p-4 lg:p-8 mb-12">
       <div className="flex p-4 rounded-xl bg-white md:p-12 gap-10 flex-col-reverse lg:flex-row lg:max-w-[1100px] mx-auto">
         {/* form */}
         <div className="lg:w-1/2  p-4 md:p-8">
