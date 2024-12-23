@@ -4,6 +4,7 @@ import { format } from "date-fns";
 import { useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
+import PropTypes from "prop-types";
 
 const CardDetails = ({ post , setLoad, load}) => {
   const { user } = useAuth();
@@ -217,6 +218,12 @@ const CardDetails = ({ post , setLoad, load}) => {
     </div>
   );
 };
+
+CardDetails.propTypes={
+  post:PropTypes.object,
+  load:PropTypes.bool,
+  setLoad:PropTypes.func
+}
 
 export default CardDetails;
 
