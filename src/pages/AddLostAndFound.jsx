@@ -167,7 +167,7 @@ const AddLostAndFound = () => {
                 <div className="border rounded-lg border-blue-600">
                   <DatePicker
                     selected={startDate}
-                    className="p-3 w-full outline-none"
+                    className="p-3 w-full rounded-lg outline-none"
                     onChange={(date) => setStartDate(date)}
                   />
                 </div>

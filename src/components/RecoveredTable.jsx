@@ -1,3 +1,5 @@
+import { format } from "date-fns";
+
 const RecoveredTable = ({ post }) => {
   return (
     <div>
@@ -8,11 +10,12 @@ const RecoveredTable = ({ post }) => {
             <tr className="bg-blue-200 text-base text-black">
               <th>Sl.</th>
               <th>Thumbnail</th>
+              <th>Lost Date</th>
               <th>Title</th>
-              <th>Description</th>
-              <th>Location</th>
-              <th>Status</th>
+              <th>Pick Location</th>
+              <th>Pick Date</th>
               <th>Category</th>
+              <th>Owner</th>
             </tr>
           </thead>
           <tbody>
@@ -22,13 +25,14 @@ const RecoveredTable = ({ post }) => {
                 <td>
                     <img src={item?.thumbnail} alt="" className="w-12 h-12 rounded-full" />
                 </td>
+                <td>{format(new Date(item?.lostDate), "PP")}</td>
                 <td>{item?.title}</td>
-                <td>{item?.description.slice(0, 30)}...</td>
-                <td>{item?.location}</td>
-                <td>
-                    <button className="bg-green-300 py-1 px-4 rounded-full">{item?.status}</button>
-                </td>
+                <td>{item?.pickLocation}</td>
+                <td>{format(new Date(item?.pickDate), "PP")}</td>
                 <td>{item?.category}</td>
+                <td>
+                {item?.owner}  
+                </td>
               </tr>
             ))}
           </tbody>

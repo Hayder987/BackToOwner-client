@@ -31,9 +31,15 @@ const CardDetails = ({ post , setLoad, load}) => {
         postId:_id,
         pickLocation,
         pickDate:startDate,
-        name:user?.displayName,
-        email:user?.email,
-        image:user?.photoURL
+        recoveredName:user?.displayName,
+        recoveredEmail:user?.email,
+        userImage:user?.photoURL,
+        title,
+        thumbnail,
+        owner:name,
+        category,
+        lostDate
+
     }
     try{
       await axios.post(`${import.meta.env.VITE_serverUrl}/addData`, dataInfo)

@@ -8,11 +8,13 @@ import LoaderSpinner from "../components/LoaderSpinner";
 import RecoveredTable from "../components/RecoveredTable";
 import Lottie from "react-lottie";
 import noData from '../assets/LottieFiles/nodata.json'
+import useAuth from "../hooks/useAuth";
 
 const AllRecovered = () => {
   const [post, setPost] = useState([]);
   const [loading, setLoading] = useState(true);
   const [menu, setMenu] = useState("column");
+  const {user}= useAuth()
   const defaultOptions = {
     loop: true,
     autoplay: true,
@@ -26,7 +28,7 @@ const AllRecovered = () => {
     useEffect(() => {
       const fetchData = async () => {
         await axios
-          .get(`${import.meta.env.VITE_serverUrl}/allRecovered`)
+          .get(`${import.meta.env.VITE_serverUrl}/allRecovered?email=${user?.email}`)
           .then((res) => {
             setPost(res.data);
             setLoading(false);

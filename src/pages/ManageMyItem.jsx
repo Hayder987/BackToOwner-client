@@ -32,7 +32,7 @@ const ManageMyItem = () => {
     }, []);
     const fetchData = async () => {
       await axios
-        .get(`${import.meta.env.VITE_serverUrl}/userData/${user?.email}`)
+        .get(`${import.meta.env.VITE_serverUrl}/userData?email=${user?.email}`)
         .then((res) => {
           setPostData(res.data);
           setLoading(false);
