@@ -1,10 +1,14 @@
 import { format } from "date-fns";
+import { motion } from "motion/react";
 
 const RecoverdCard = ({ post }) => {
   return (
     <div className="grid p-2 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {post.map((item) => (
-        <div
+        <motion.div
+        whileInView={{ scale: [0, 1] }} 
+        transition={{ duration: 1 }} 
+        viewport={{ once: false, amount: 0.5 }}
           key={item._id}
           className="flex justify-center gap-4  border p-2 rounded-lg"
         >
@@ -39,7 +43,7 @@ const RecoverdCard = ({ post }) => {
               <span className="">{item?.owner}</span>
             </p>
           </div>
-        </div>
+        </motion.div>
       ))}
     </div>
   );
