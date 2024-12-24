@@ -4,6 +4,8 @@ import RecentPost from "../components/home-components/RecentPost";
 import axios from "axios";
 import Swal from "sweetalert2";
 import AboutSection from "../components/home-components/AboutSection";
+import OurServices from "../components/home-components/OurServices";
+import StatusBar from "../components/home-components/StatusBar";
 
 const Home = () => {
   const [postData, setPostData] = useState([]);
@@ -33,6 +35,8 @@ const Home = () => {
         <RecentPost postData={postData} loading={loading}></RecentPost>
       </div>
       <AboutSection></AboutSection>
+      <OurServices></OurServices>
+      <StatusBar></StatusBar>
     </div>
   );
 };

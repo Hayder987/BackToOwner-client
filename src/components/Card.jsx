@@ -19,7 +19,7 @@ const Card = ({post}) => {
         whileInView={{ scale: [0, 1] }} 
         transition={{ duration: 1 }} 
         viewport={{ once: false, amount: 0.5 }}
-        className="flex justify-center gap-4  border p-2 rounded-lg">
+        className="flex justify-center gap-4  border p-2 shadow-md rounded-lg">
             {/* img */}
            <div className="w-1/2">
             <img src={thumbnail} alt="" className="w-full h-full object-cover rounded-lg" />
