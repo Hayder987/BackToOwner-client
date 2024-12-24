@@ -6,9 +6,13 @@ import { SiIconfinder } from "react-icons/si";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { FiLogIn } from "react-icons/fi";
+import { AiOutlineMenuFold } from "react-icons/ai";
+import { useState } from "react";
+import { RxCross2 } from "react-icons/rx";
 
 const NavBar = () => {
   const { user, userLogOut, loading } = useAuth();
+  const [menu, setMenu] = useState(false);
 
   const logOutHandler = () => {
     userLogOut()
@@ -42,6 +46,36 @@ const NavBar = () => {
           <span className="text-blue-500">Back</span>ToOwner
         </h1>
       </div>
+
+      <div className="flex md:hidden">
+        <button onClick={() => setMenu(!menu)} className="text-2xl">
+          {!menu ? <AiOutlineMenuFold /> : <RxCross2 />}
+        </button>
+      </div>
+      <div className={`absolute ${menu?'flex':"hidden"} md:hidden z-10 top-20 w-[90%] 
+      rounded-lg p-8 bg-[#040861]`}>
+        <ul
+        onClick={()=>setMenu(!menu)}
+         className="flex flex-col gap-4 text-white ">
+          <NavLink to="/">
+            <li className="flex items-center gap-1">
+              <span>
+                <IoHome />
+              </span>
+              Home
+            </li>
+          </NavLink>
+          <NavLink to="/lostandfound">
+            <li className="flex items-center gap-1">
+              <span>
+                <SiIconfinder />
+              </span>{" "}
+              Lost & Found Items
+            </li>
+          </NavLink>
+        </ul>
+      </div>
+
       <div className="flex justify-center items-center gap-4">
         <ul className="hidden md:flex justify-center items-center gap-10 font-medium">
           <NavLink to="/">
@@ -79,12 +113,13 @@ const NavBar = () => {
                       referrerPolicy="no-referrer"
                       src={user?.photoURL}
                       alt=""
-                      className="w-8 h-8 rounded-full"
+                      className="w-6 h-6 md:w-8 md:h-8 rounded-full"
                     />
                   </div>
                   <ul
                     tabIndex={0}
-                    className="dropdown-content font-medium gap-4 menu top-16 right-0 rounded-xl bg-blue-100 
+                    className="dropdown-content font-medium gap-4
+                     menu top-16 right-0 rounded-xl bg-blue-100 
                       z-10 w-64 max-w-[300px] text-base p-4 shadow"
                   >
                     <NavLink to="/addlostfound">
@@ -103,7 +138,7 @@ const NavBar = () => {
                     onClick={logOutHandler}
                     data-tooltip-id="my-tooltip"
                     data-tooltip-content="Log-Out!"
-                    className="text-3xl text-blue-500"
+                    className="text-2xl md:text-3xl text-blue-500"
                   >
                     <LuLogOut />
                   </button>
@@ -113,7 +148,9 @@ const NavBar = () => {
               <div className="">
                 <Link to="/login">
                   <button className="py-3 flex items-center gap-2 px-5 rounded-lg bg-blue-600 text-white font-semibold">
-                    <span className="text-xl"><FiLogIn /></span>
+                    <span className="text-xl">
+                      <FiLogIn />
+                    </span>
                     Login
                   </button>
                 </Link>

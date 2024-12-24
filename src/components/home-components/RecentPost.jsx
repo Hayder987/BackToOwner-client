@@ -23,7 +23,7 @@ const RecentPost = ({ postData, loading }) => {
             ))}
           </div>
           <div className="flex justify-center items-center mt-8">
-            <Link to="/lostandfound"><button className="bg-blue-600 py-3 px-8 text-white font-medium">See all Post</button></Link>
+            <Link to="/lostandfound"><button className="bg-blue-600 rounded-lg py-3 px-8 text-white font-medium">See all Post</button></Link>
           </div>
         </div>
       )}

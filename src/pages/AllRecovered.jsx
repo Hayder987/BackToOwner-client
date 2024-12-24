@@ -1,13 +1,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { FaBars } from "react-icons/fa";
-import { ImTable2 } from "react-icons/im";
 import Swal from "sweetalert2";
 import RecoverdCard from "../components/RecoverdCard";
 import LoaderSpinner from "../components/LoaderSpinner";
 import RecoveredTable from "../components/RecoveredTable";
 import useAuth from "../hooks/useAuth";
 import NoData from "../components/NoData";
+import { CgMenuGridR } from "react-icons/cg";
 
 const AllRecovered = () => {
   const [post, setPost] = useState([]);
@@ -51,13 +51,13 @@ const AllRecovered = () => {
                   onClick={() => setMenu("table")}
                   className={`text-3xl ${menu === "table" && "text-blue-600"}`}
                 >
-                  <ImTable2 />
+                 <FaBars /> 
                 </button>
                 <button
                   onClick={() => setMenu("column")}
-                  className={`text-3xl ${menu === "column" && "text-blue-600"}`}
+                  className={`text-4xl ${menu === "column" && "text-blue-600"}`}
                 >
-                  <FaBars />
+                  <CgMenuGridR />
                 </button>
               </div>
             </div>
