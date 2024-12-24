@@ -3,14 +3,15 @@ import { useEffect, useState } from "react";
 import LoaderSpinner from "../components/LoaderSpinner";
 import Swal from "sweetalert2";
 import Card from "../components/Card";
+import NoData from "../components/NoData";
 
 const LostAndFound = () => {
   const [postData, setPostData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [filter, setFilter] = useState("allcategory")
-  const [search, setSearch] = useState("")
+  const [filter, setFilter] = useState("allcategory");
+  const [search, setSearch] = useState("");
 
-  console.log(filter, search)
+  console.log(filter, search);
 
   try {
     useEffect(() => {
@@ -18,13 +19,13 @@ const LostAndFound = () => {
         await axios
           .get(`${import.meta.env.VITE_serverUrl}/getItems?search=${search}`)
           .then((res) => {
-            if(filter==="allcategory"){
+            if (filter === "allcategory") {
               setPostData(res.data);
-              
-            }
-            else{
-              const filterData = res.data.filter(item=> item.category === filter)
-              setPostData(filterData) 
+            } else {
+              const filterData = res.data.filter(
+                (item) => item.category === filter
+              );
+              setPostData(filterData);
             }
             setLoading(false);
           });
@@ -42,12 +43,10 @@ const LostAndFound = () => {
       ) : (
         <div className="container mx-auto ">
           <div className="bg-blue-100 flex justify-between items-center py-3 px-6 mb-12 ">
-            <div className="hidden md:flex">
-              
-            </div>
+            <div className="hidden md:flex"></div>
             <div>
               <input
-               onChange={(e)=>setSearch(e.target.value)}
+                onChange={(e) => setSearch(e.target.value)}
                 type="text"
                 placeholder="Search here"
                 className="input input-bordered  w-full md:w-[350px] lg:w-[500px]"
@@ -55,7 +54,7 @@ const LostAndFound = () => {
             </div>
             <div className="flex justify-end gap-10">
               <select
-                onChange={(e)=>setFilter(e.target.value)}
+                onChange={(e) => setFilter(e.target.value)}
                 required
                 className="select select-bordered w-full"
               >
@@ -68,11 +67,17 @@ const LostAndFound = () => {
               </select>
             </div>
           </div>
-          <div className="shadow-md grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 bg-white p-4">
-            {postData.map((post) => (
-              <Card key={post._id} post={post}></Card>
-            ))}
-          </div>
+          {postData.length === 0 ? (
+            <div className="p-4 md:p-8">
+               <NoData></NoData>
+            </div>
+          ) : (
+            <div className="shadow-md grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 bg-white p-4">
+              {postData.map((post) => (
+                <Card key={post._id} post={post}></Card>
+              ))}
+            </div>
+          )}
         </div>
       )}
     </div>

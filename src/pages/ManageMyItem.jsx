@@ -7,24 +7,14 @@ import { format } from "date-fns";
 import { FaEdit } from "react-icons/fa";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import LoaderSpinner from "../components/LoaderSpinner";
-import noData from '../assets/LottieFiles/nodata.json'
-import Lottie from "react-lottie";
 import { Link, useNavigate } from "react-router";
+import NoData from "../components/NoData";
 
 const ManageMyItem = () => {
   const { user } = useAuth();
   const [postData, setPostData] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate()
-
-  const defaultOptions = {
-    loop: true,
-    autoplay: true,
-    animationData: noData,
-    rendererSettings: {
-      preserveAspectRatio: "xMidYMid meet",
-    },
-  };
 
   try {
     useEffect(() => {
@@ -76,10 +66,7 @@ const ManageMyItem = () => {
         <div className="container mx-auto bg-white shadow-lg p-6">
         {postData.length===0?
         <div className="p-4 md:p-8">
-            <h1 className="text-3xl md:text-4xl text-center font-semibold mb-6">No Data found!</h1>
-            <div className="md:max-w-[500px] mx-auto ">
-              <Lottie options={defaultOptions} height={"100%"} width={"100%"} />
-            </div>
+            <NoData></NoData>
             <p className="text-center text-xl text-gray-600 font-semibold">
                 <span>To Add Your Post ?</span>
                 <Link to='/addlostfound'><span className="text-blue-600 underline cursor-pointer"> Click Here</span></Link> 
