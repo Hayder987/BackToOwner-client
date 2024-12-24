@@ -28,17 +28,17 @@ const ManageMyItem = () => {
 
   try {
     useEffect(() => {
+      const fetchData = async () => {
+        await axios
+          .get(`${import.meta.env.VITE_serverUrl}/userData?email=${user?.email}`)
+          .then((res) => {
+            setPostData(res.data);
+            setLoading(false);
+          });
+      };
       fetchData();
-    }, []);
-    const fetchData = async () => {
-      await axios
-        .get(`${import.meta.env.VITE_serverUrl}/userData?email=${user?.email}`)
-        .then((res) => {
-          setPostData(res.data);
-          setLoading(false);
-        });
-    };
-
+    }, [user?.email]);
+    
   } catch (err) {
     Swal.fire(`${err}`);
   }
