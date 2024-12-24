@@ -11,7 +11,7 @@ const LostAndFound = () => {
   const [filter, setFilter] = useState("allcategory");
   const [search, setSearch] = useState("");
 
-  console.log(filter, search);
+
 
   try {
     useEffect(() => {

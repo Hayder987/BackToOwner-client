@@ -55,7 +55,7 @@ const UpdatePage = () => {
       thumbnail: uploadedUrl?uploadedUrl:post?.thumbnail      ,
     };
 
-    console.log(updateData)
+
     await axios
       .patch(`${import.meta.env.VITE_serverUrl}/updateItems/${id}`, updateData)
       .then(() => {

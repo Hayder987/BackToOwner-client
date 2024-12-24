@@ -3,6 +3,7 @@ import { AuthContext } from "../context/authContext";
 import { useEffect, useState } from "react";
 import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { auth } from "../firebase/firebase.config";
+import axios from "axios";
 
 
 const AuthProvider = ({children}) => {
@@ -30,8 +31,26 @@ const AuthProvider = ({children}) => {
     }
 
     useEffect(()=>{
-      const unsubsCribe = onAuthStateChanged(auth, (currentUser)=>{
+      const unsubsCribe = onAuthStateChanged(auth,(currentUser)=>{
         setUser(currentUser)
+        if(currentUser?.email){
+          const user ={
+            email: currentUser?.email
+          }
+          axios.post(`${import.meta.env.VITE_serverUrl}/jwt`,user,
+            {withCredentials:true}
+          )
+          .then(()=>{
+            setLoading(false)
+          })
+        }
+        else{
+          axios.post(`${import.meta.env.VITE_serverUrl}/logOut`,{},
+            {withCredentials:true}
+          )
+          
+        }
+
         setLoading(false)
       })
       return ()=>{
@@ -55,7 +74,7 @@ const AuthProvider = ({children}) => {
         userLogOut
     }
 
-    console.log(user)
+
 
     return(
         <AuthContext.Provider value={authInfo}>

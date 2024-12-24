@@ -10,27 +10,28 @@ import LoaderSpinner from "../components/LoaderSpinner";
 import { Link, useNavigate } from "react-router";
 import NoData from "../components/NoData";
 import { motion } from "motion/react";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const ManageMyItem = () => {
   const { user } = useAuth();
   const [postData, setPostData] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const axiosUrl = useAxiosSecure()
 
   try {
     useEffect(() => {
       const fetchData = async () => {
-        await axios
+        await axiosUrl
           .get(
-            `${import.meta.env.VITE_serverUrl}/userData?email=${user?.email}`
-          )
+            `/userData?email=${user?.email}`)
           .then((res) => {
             setPostData(res.data);
             setLoading(false);
           });
       };
       fetchData();
-    }, [user?.email]);
+    }, [user?.email,axiosUrl]);
   } catch (err) {
     Swal.fire(`${err}`);
   }

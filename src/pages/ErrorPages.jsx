@@ -13,7 +13,7 @@ const ErrorPages = () => {
       preserveAspectRatio: "xMidYMid meet",
     },
   };
-  console.log(error);
+
 
   return (
     <div className="py-24">
