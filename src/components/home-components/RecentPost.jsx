@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import Card from "../Card";
 import LoaderSpinner from "../LoaderSpinner";
 import { Link } from "react-router";
+import { motion } from "motion/react";
 
 const RecentPost = ({ postData, loading }) => {
   return (
@@ -17,13 +18,21 @@ const RecentPost = ({ postData, loading }) => {
         <LoaderSpinner></LoaderSpinner>
       ) : (
         <div>
-          <div className="grid p-2 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <motion.div
+          whileInView={{ y: [200, 0], }}
+          transition={{ duration: 1 }}
+          viewport={{ once: false, amount: 0.5 }}
+           className="grid p-2 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {postData.map((post) => (
               <Card key={post._id} post={post}></Card>
             ))}
-          </div>
+          </motion.div>
           <div className="flex justify-center items-center mt-8">
-            <Link to="/lostandfound"><button className="bg-blue-600 rounded-lg py-3 px-8 text-white font-medium">See all Post</button></Link>
+            <Link to="/lostandfound"><motion.button
+            whileInView={{ scale: [0, 1] }} 
+            transition={{ duration: 1 }} 
+            viewport={{ once: false, amount: 0.5 }}
+             className="bg-blue-600 rounded-lg py-3 px-8 text-white font-medium">See all Post</motion.button></Link>
           </div>
         </div>
       )}

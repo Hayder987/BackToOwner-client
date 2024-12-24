@@ -3,6 +3,7 @@ import Banner from "../components/home-components/Banner";
 import RecentPost from "../components/home-components/RecentPost";
 import axios from "axios";
 import Swal from "sweetalert2";
+import AboutSection from "../components/home-components/AboutSection";
 
 const Home = () => {
   const [postData, setPostData] = useState([]);
@@ -31,6 +32,7 @@ const Home = () => {
       <div className="container mx-auto">
         <RecentPost postData={postData} loading={loading}></RecentPost>
       </div>
+      <AboutSection></AboutSection>
     </div>
   );
 };
