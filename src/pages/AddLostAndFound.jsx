@@ -6,11 +6,13 @@ import banner from '../assets/images/addbanner-2.jpg'
 import useAuth from "../hooks/useAuth";
 import axios from "axios";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const AddLostAndFound = () => {
   const { handleImageChange, handleUpload, uploadedUrl,setUploadedUrl, setSelectedImage } = useUpload();
   const [startDate, setStartDate] = useState(new Date());
   const {user} = useAuth()
+  const axiosUrl = useAxiosSecure()
   
   useEffect(()=>{
     setUploadedUrl('')
@@ -42,7 +44,7 @@ const AddLostAndFound = () => {
       postedDate : today
     }
 
-    await axios.post(`${import.meta.env.VITE_serverUrl}/addItems`, postData)
+    await axiosUrl.post(`/addItems`, postData)
     .then(()=>{
       Swal.fire({
         position: "top-end",

@@ -7,6 +7,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { useNavigate, useParams } from "react-router";
 import LoaderSpinner from "../components/LoaderSpinner";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const UpdatePage = () => {
   const { id } = useParams();
@@ -16,12 +17,13 @@ const UpdatePage = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [loading, setLoading] = useState(true)
   const navigate = useNavigate()
+  const axiosUrl = useAxiosSecure()
 
 
   useEffect(() => {
     const fetchData = async () => {
-        await axios
-          .get(`${import.meta.env.VITE_serverUrl}/item/${id}`)
+        await axiosUrl
+          .get(`/item/${id}`)
           .then((res) => {
             setStartDate(res.data.lostDate)
             setPost(res.data);
@@ -29,7 +31,7 @@ const UpdatePage = () => {
           });
       };
     fetchData();
-  }, [post?.lostDate, id]);
+  }, [post?.lostDate, id, axiosUrl]);
 
  
   const updateFormHandler = async (e) => {
@@ -56,8 +58,8 @@ const UpdatePage = () => {
     };
 
 
-    await axios
-      .patch(`${import.meta.env.VITE_serverUrl}/updateItems/${id}`, updateData)
+    await axiosUrl
+      .patch(`/updateItems/${id}`, updateData)
       .then(() => {
         Swal.fire({
           position: "top-end",

@@ -5,11 +5,13 @@ import { useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import PropTypes from "prop-types";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const CardDetails = ({ post , setLoad, load}) => {
   const { user } = useAuth();
   const [startDate, setStartDate] = useState(new Date());
   const [pickLocation, setpickLocation] = useState('')
+  const axiosUrl = useAxiosSecure()
 
   const {
     title,
@@ -42,7 +44,7 @@ const CardDetails = ({ post , setLoad, load}) => {
 
     }
     try{
-      await axios.post(`${import.meta.env.VITE_serverUrl}/addData`, dataInfo)
+      await axiosUrl.post(`/addData`, dataInfo)
       .then(()=>{
         setLoad(!load)
         Swal.fire({

@@ -47,8 +47,8 @@ const ManageMyItem = () => {
       confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        await axios
-          .delete(`${import.meta.env.VITE_serverUrl}/postId/${id}`)
+        await axiosUrl
+          .delete(`/postId/${id}`)
           .then(() => {
             const remaing = postData.filter((item) => item._id !== id);
             setPostData(remaing);

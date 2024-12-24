@@ -4,6 +4,7 @@ import { useParams } from "react-router";
 import Swal from "sweetalert2";
 import LoaderSpinner from "../components/LoaderSpinner";
 import CardDetails from "../components/CardDetails";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 
 const DetailsPAge = () => {
@@ -11,18 +12,19 @@ const DetailsPAge = () => {
     const [post, setPost] = useState({})
     const [loading, setLoading]= useState(true)
     const [load, setLoad] = useState(false)
+    const axiosUrl = useAxiosSecure()
 
    try{
     useEffect(()=>{
         const fetchData = ()=>{
-            axios.get(`${import.meta.env.VITE_serverUrl}/item/${id}`)
+            axiosUrl.get(`/item/${id}`)
             .then(res=>{
                 setPost(res.data)
                 setLoading(false)
             })
         }
         fetchData()
-        },[load, id])
+        },[load, id, axiosUrl])
     
        
    }
