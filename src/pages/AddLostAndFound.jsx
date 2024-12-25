@@ -7,12 +7,14 @@ import useAuth from "../hooks/useAuth";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import { Helmet } from "react-helmet";
+import { useTranslation } from "react-i18next";
 
 const AddLostAndFound = () => {
   const { handleImageChange, handleUpload, uploadedUrl,setUploadedUrl, setSelectedImage } = useUpload();
   const [startDate, setStartDate] = useState(new Date());
   const {user} = useAuth()
   const axiosUrl = useAxiosSecure()
+  const { t } = useTranslation();
   
   useEffect(()=>{
     setUploadedUrl('')
@@ -75,25 +77,26 @@ const AddLostAndFound = () => {
       <div className="flex shadow-md flex-col rounded-lg lg:flex-row gap-8 lg:max-w-[1200px] bg-white mx-auto p-4 md:p-8">
         {/* form */}
         <div className="w-full lg:w-7/12">
-        <h3 className="text-xl md:text-3xl mb-6 font-semibold">Add Lost & Found Item</h3>
+        <h3 className="text-xl md:text-3xl mb-6 font-semibold">
+          {t('addPostHader')}</h3>
           <form className="flex flex-col gap-6" onSubmit={postFormHandler}>
             {/* title and images */}
             <div className="flex flex-col md:flex-row justify-center gap-6">
               <div className="form-control w-full">
                 <label className="label">
-                  <span className="label-text">Title</span>
+                  <span className="label-text">{t('title')}</span>
                 </label>
                 <input
                   type="text"
                   name="title"
-                  placeholder="Title"
+                  placeholder={`${t('title')}`}
                   className="input input-bordered input-primary"
                   required
                 />
               </div>
               <div className="form-control w-full">
                 <label className="label">
-                  <span className="label-text">Photo Upload</span>
+                  <span className="label-text">{t('upload')}</span>
                 </label>
                 <div className="flex flex-col lg:flex-row gap-4">
                   <input
@@ -110,7 +113,7 @@ const AddLostAndFound = () => {
             <div className="flex flex-col md:flex-row justify-center gap-6">
               <div className="form-control w-full">
                 <label className="label">
-                  <span className="label-text">Post Type</span>
+                  <span className="label-text">{t('type')}</span>
                 </label>
                 <select
                   name="postType"
@@ -124,7 +127,7 @@ const AddLostAndFound = () => {
               </div>
               <div className="form-control w-full">
                 <label className="label">
-                  <span className="label-text">Category</span>
+                  <span className="label-text">{t('category')}</span>
                 </label>
                 <select
                   name="category"
@@ -143,31 +146,31 @@ const AddLostAndFound = () => {
             </div>
             <div className="form-control w-full">
               <label className="label">
-                <span className="label-text">Description</span>
+                <span className="label-text">{t('description')}</span>
               </label>
               <textarea
                 name="description"
                 className="textarea resize-none textarea-primary"
-                placeholder="Description"
+                placeholder={`${t('description')}`}
                 required
               ></textarea>
             </div>
             <div className="flex flex-col md:flex-row justify-center gap-6">
               <div className="form-control w-full">
                 <label className="label">
-                  <span className="label-text">Location</span>
+                  <span className="label-text">{t('location')}</span>
                 </label>
                 <input
                   type="text"
                   name="location"
-                  placeholder="where the item was lost"
+                  placeholder={`${t('locationDesc')}`}
                   className="input rounded-none input-bordered input-primary"
                   required
                 />
               </div>
               <div className="form-control w-full">
                 <label className="label">
-                  <span className="label-text">Date Lost</span>
+                  <span className="label-text">{t('getDate')}</span>
                 </label>
                 <div className="border rounded-lg border-blue-600">
                   <DatePicker
@@ -180,7 +183,7 @@ const AddLostAndFound = () => {
             </div>
             <div className="form-control w-full">
               <label className="label">
-                <span className="label-text">Contact Information </span>
+                <span className="label-text">{t('contact')} </span>
               </label>
               <div className="flex flex-col md:flex-row justify-center gap-6">
                 <input
@@ -204,7 +207,7 @@ const AddLostAndFound = () => {
               </div>
             </div>
 
-            <input type="submit" value="Add Post" className="w-full rounded-lg bg-blue-600 text-white py-3 px-6" />
+            <input type="submit" value={`${t('addBtn')}`} className="w-full rounded-lg bg-blue-600 text-white py-3 px-6" />
           </form>
         </div>
         {/* banner */}

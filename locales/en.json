@@ -52,5 +52,18 @@
   "photoUrl" : "PhotoUrl",
   "register" : "Register",
   "misc3" : "Have An Account?",
-  "misc4" : "Login Now"
+  "misc4" : "Login Now",
+  "addPostHader" : "Add Lost & Found Item",
+  "title" : "Title",
+  "upload" : "Photo Upload",
+  "type": "Post Type",
+  "category" : "Category",
+  "description" : "Description",
+  "location" : "Location",
+  "locationDesc" : "where the item was lost or found",
+  "getDate" : "Date Lost or Found",
+  "contact" : "Contact Information",
+  "addBtn" : "Add Post",
+  "updateBtn" : "Update Post"
+  
 }

@@ -8,6 +8,7 @@ import { useNavigate, useParams } from "react-router";
 import LoaderSpinner from "../components/LoaderSpinner";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import { Helmet } from "react-helmet";
+import { useTranslation } from "react-i18next";
 
 const UpdatePage = () => {
   const { id } = useParams();
@@ -17,6 +18,7 @@ const UpdatePage = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [loading, setLoading] = useState(true)
   const navigate = useNavigate()
+  const { t } = useTranslation();
   const axiosUrl = useAxiosSecure()
 
 
@@ -97,20 +99,20 @@ const UpdatePage = () => {
             <div className="flex flex-col md:flex-row justify-center gap-6">
               <div className="form-control w-full">
                 <label className="label">
-                  <span className="label-text">Title</span>
+                  <span className="label-text">{t('title')}</span>
                 </label>
                 <input
                   type="text"
                   name="title"
                   defaultValue={post?.title}
-                  placeholder="Title"
+                  placeholder={`${t('title')}`}
                   className="input input-bordered input-primary"
                   
                 />
               </div>
               <div className="form-control w-full">
                 <label className="label">
-                  <span className="label-text">Photo Upload</span>
+                  <span className="label-text">{t('upload')}</span>
                 </label>
                 <div className="flex flex-col lg:flex-row gap-4">
                   <input
@@ -126,7 +128,7 @@ const UpdatePage = () => {
             <div className="flex flex-col md:flex-row justify-center gap-6">
               <div className="form-control w-full">
                 <label className="label">
-                  <span className="label-text">Post Type</span>
+                  <span className="label-text">{t('type')}</span>
                 </label>
 
                 {post?.status && (
@@ -143,7 +145,7 @@ const UpdatePage = () => {
               </div>
               <div className="form-control w-full">
                 <label className="label">
-                  <span className="label-text">Category</span>
+                  <span className="label-text">{t('category')}</span>
                 </label>
                 {post?.category && (
                   <select
@@ -161,7 +163,7 @@ const UpdatePage = () => {
             </div>
             <div className="form-control w-full">
               <label className="label">
-                <span className="label-text">Description</span>
+                <span className="label-text">{t('description')}</span>
               </label>
               <textarea
                 name="description"
@@ -173,7 +175,7 @@ const UpdatePage = () => {
             <div className="flex flex-col md:flex-row justify-center gap-6">
               <div className="form-control w-full">
                 <label className="label">
-                  <span className="label-text">Location</span>
+                  <span className="label-text">{t('location')}</span>
                 </label>
                 <input
                   type="text"
@@ -185,7 +187,7 @@ const UpdatePage = () => {
               </div>
               <div className="form-control w-full">
                 <label className="label">
-                  <span className="label-text">Date Lost</span>
+                  <span className="label-text">{t('getDate')}</span>
                 </label>
                 <div className="border rounded-lg border-blue-600">
                   <DatePicker
@@ -198,7 +200,7 @@ const UpdatePage = () => {
             </div>
             <div className="form-control w-full">
               <label className="label">
-                <span className="label-text">Contact Information </span>
+                <span className="label-text">{t('contact')} </span>
               </label>
               <div className="flex flex-col md:flex-row justify-center gap-6">
                 <input
@@ -222,7 +224,7 @@ const UpdatePage = () => {
 
             <input
               type="submit"
-              value="Update Post"
+              value={`${t('updateBtn')}`}
               className="w-full rounded-lg bg-blue-600 text-white py-3 px-6"
             />
           </form>
