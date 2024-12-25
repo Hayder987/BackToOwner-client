@@ -57,7 +57,7 @@ const NavBar = () => {
           </h1>
         </div>
 
-        <div className="flex md:hidden">
+        <div className="flex lg:hidden">
           <button onClick={() => setMenu(!menu)} className="text-2xl">
             {!menu ? <AiOutlineMenuFold /> : <RxCross2 />}
           </button>
@@ -65,7 +65,7 @@ const NavBar = () => {
         <div
           className={`absolute ${
             menu ? "flex" : "hidden"
-          } md:hidden z-10 top-20 w-[90%] 
+          } lg:hidden z-10 top-20 w-[90%] 
       rounded-lg p-8 bg-[#040861]`}
         >
           <ul
@@ -92,7 +92,7 @@ const NavBar = () => {
         </div>
 
         <div className="flex justify-center items-center gap-4">
-          <ul className="hidden md:flex justify-center items-center gap-10 font-medium">
+          <ul className="hidden lg:flex justify-center items-center gap-10 font-medium">
             <NavLink to="/">
               <li className="flex items-center gap-1">
                 <span>
