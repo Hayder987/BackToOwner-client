@@ -36,5 +36,21 @@
   "statusHeading3": "112+",
   "statusDesc3": "Countries",
   "statusHeading4": "28K+",
-  "statusDesc4": "Total"
+  "statusDesc4": "Total",
+  "paginationBtn1" : "Previous",
+  "paginationBtn2" : "Next",
+  "loginHeading" : "Welcome To BackToOwner",
+  "loginDesc" : "Enter Your Email And Password To Login",
+  "email":"email",
+  "password":"Password",
+  "divider" : "Or, Login with",
+  "google" : "Login With Google",
+  "misc1" : "Don't Have An Account?",
+  "misc2" : "Register Now",
+  "registerDesc" : "Enter Your Information To Register",
+  "name" : "Name",
+  "photoUrl" : "PhotoUrl",
+  "register" : "Register",
+  "misc3" : "Have An Account?",
+  "misc4" : "Login Now"
 }

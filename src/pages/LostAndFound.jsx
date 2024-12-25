@@ -7,12 +7,14 @@ import NoData from "../components/NoData";
 import { useLoaderData } from "react-router";
 import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 import { Helmet } from "react-helmet";
+import { useTranslation } from "react-i18next";
 
 const LostAndFound = () => {
   const [postData, setPostData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState("allcategory");
   const [search, setSearch] = useState("");
+  const { t } = useTranslation();
   // pagination
   const {count} = useLoaderData()
   const itemPerPage = 9;
@@ -104,7 +106,7 @@ const LostAndFound = () => {
               }}
               className="flex w-32 justify-center items-center py-2 px-5 rounded-lg  gap-2 bg-blue-600 text-white">
                 <span className="text-xl"><FaArrowLeftLong /></span>
-                <span className="font-semibold">Previous</span>
+                <span className="font-semibold">{t('paginationBtn1')}</span>
               </button>
               {page.map(item=>(
                 <button 
@@ -123,7 +125,7 @@ const LostAndFound = () => {
                 }
               }}
                className="flex w-32 justify-center items-center py-2 px-5 rounded-lg  gap-2 bg-blue-600 text-white">
-                <span className="font-semibold">Next</span>
+                <span className="font-semibold">{t('paginationBtn2')}</span>
                 <span className=" text-xl"><FaArrowRightLong /></span>
               </button>
             </div>

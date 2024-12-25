@@ -7,6 +7,7 @@ import { useState } from "react";
 import useAuth from "../hooks/useAuth";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet";
+import { useTranslation } from "react-i18next";
 
 const Login = () => {
   const { loginUser, googleLogin } = useAuth();
@@ -14,6 +15,7 @@ const Login = () => {
   const upperCase = /^(?=.*[A-Z]).+$/;
   const lowerCase = /^(?=.*[a-z]).+$/;
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const {state} = useLocation()
   const destination = state || '/'
 
@@ -101,22 +103,21 @@ const Login = () => {
         <div className="lg:w-1/2  p-4 md:p-8">
           <img src={logo} alt="" className="w-16 h-16 mb-8 rounded-full" />
           <h1 className="text-xl md:text-3xl font-semibold mb-4">
-            Welcome To BackToOwner
+            {t('loginHeading')}
           </h1>
           <p className="text-gray-600 mb-6 text-base md:text-xl font-medium">
-            Enter Your Email And Password To{" "}
-            <span className="text-blue-500"> Login</span>
+            {t('loginDesc')}
           </p>
           <div className="">
             <form onSubmit={loginHandler}>
               <div className="form-control mb-4">
                 <label className="label">
-                  <span className="label-text">Email</span>
+                  <span className="label-text">{t('email')}</span>
                 </label>
                 <input
                   type="email"
                   name="email"
-                  placeholder="email"
+                  placeholder={`${t('email')}`}
                   className="border border-blue-500 rounded-xl p-3 outline-none "
                   required
                 />
@@ -124,12 +125,12 @@ const Login = () => {
 
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Password</span>
+                  <span className="label-text">{t('password')}</span>
                 </label>
                 <input
                   type="password"
                   name="password"
-                  placeholder="Password"
+                  placeholder={`${t('password')}`}
                   className="border border-blue-500 rounded-xl p-3 outline-none "
                   required
                 />
@@ -142,12 +143,12 @@ const Login = () => {
               <div className="form-control mt-6 mb-6">
                 <input
                   type="submit"
-                  value="Login"
+                  value={`${t('login')}`}
                   className="bg-blue-600 cursor-pointer text-white font-semibold py-3 px-6 rounded-xl"
                 />
               </div>
             </form>
-            <div className="divider my-6">Or, Login with</div>
+            <div className="divider my-6">{t('divider')}</div>
             <div className="flex justify-center mt-4">
               <button
                 onClick={googleLoginHandler}
@@ -156,15 +157,15 @@ const Login = () => {
                 <span className="text-2xl">
                   <FcGoogle />
                 </span>
-                Login With Google
+                {t('google')}
               </button>
             </div>
             <p className="mt-6 text-center font-medium text-gray-600">
-              Don't Have An Account?
+              {t('misc1')}
               <Link to="/register">
                 <span className="text-blue-600 underline cursor-pointer">
                   {" "}
-                  Register Now
+                  {t('misc2')}
                 </span>
               </Link>
             </p>
