@@ -3,8 +3,11 @@ import { motion } from "motion/react";
 import client1 from "../../assets/images/happy.webp";
 import client2 from "../../assets/images/happpy3.jpg";
 import { Link } from "react-router";
+import { useTranslation } from "react-i18next";
 
 const AboutSection = () => {
+  const { t } = useTranslation();
+
   return (
     <div
       style={{
@@ -24,34 +27,28 @@ const AboutSection = () => {
             transition={{ duration: 1 }}
             viewport={{ once: false, amount: 0.5 }}
             className="text-xl text-left md:text-4xl font-semibold mb-8">
-              About BackToOwner
+              {t('aboutTitle')}
             </motion.h1>
             <motion.p 
             whileInView={{ x: [100, 0],  }}
             transition={{ duration: 1 }}
             viewport={{ once: false, amount: 0.5 }}
             className="text-gray-600 font-medium md:text-xl mb-6">
-              Building a community where honesty and kindness thrive through
-              collaboration.
+              {t('aboutDescription')}
             </motion.p>
             <motion.p 
             whileInView={{ x: [-150, 0],  }}
             transition={{ duration: 1 }}
             viewport={{ once: false, amount: 0.5 }}
             className="mb-6">
-              BackToOwner is a platform dedicated to connecting individuals who
-              have lost their valuable items with those who have found them. Our
-              mission is to simplify the process of reuniting lost belongings
-              with their rightful owners by providing an easy-to-use, secure,
-              and efficient solution. Whether you have misplaced something
-              precious or discovered an item, BackToOwner is here to help bridge
-              the gap and create a community of trust and goodwill.
+              {t('aboutDescription2')}
             </motion.p>
             <Link to='/addlostfound'><motion.button 
             whileInView={{ scale: [0, 1] }} 
             transition={{ duration: 1 }} 
             viewport={{ once: false, amount: 0.5 }} 
-            className="bg-blue-600 text-white font-medium py-3 px-8 rounded-lg">Get Help
+            className="bg-blue-600 text-white font-medium py-3 px-8 rounded-lg">
+              {t('aboutBtn')}
             </motion.button></Link>
           </div>
         </div>

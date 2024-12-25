@@ -137,13 +137,13 @@ const NavBar = () => {
                       z-10 w-64 max-w-[300px] text-base p-4 shadow"
                     >
                       <NavLink to="/addlostfound">
-                        <li>Add Lost & Found Item</li>
+                        <li>{t('menu3')}</li>
                       </NavLink>
                       <NavLink to="/allrecovered">
-                        <li>All Recovered Items</li>
+                      <li>{t('menu4')}</li>
                       </NavLink>
                       <NavLink to="/managemyitem">
-                        <li>Manage My Items </li>
+                      <li>{t('menu5')}</li>
                       </NavLink>
                     </ul>
                   </div>
@@ -165,7 +165,7 @@ const NavBar = () => {
                       <span className="text-xl">
                         <FiLogIn />
                       </span>
-                      Login
+                      {t('login')}
                     </button>
                   </Link>
                 </div>

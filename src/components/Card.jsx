@@ -1,8 +1,10 @@
 import { format } from 'date-fns';
 import { Link } from 'react-router';
 import { motion } from "motion/react";
+import { useTranslation } from 'react-i18next';
 
 const Card = ({post}) => {
+  const {t } = useTranslation();
 
     const {
         _id,
@@ -34,7 +36,8 @@ const Card = ({post}) => {
             <span className="font-bold">Status: </span>
             <span className={`${status==='recovered'?'text-green-600 font-semibold':'text-gray-600'}`}>{status}</span>
           </p>
-            <Link to={`/items/${_id}`}><button className="py-2 rounded-lg px-4 bg-blue-600 text-white">View Details</button></Link>
+            <Link to={`/items/${_id}`}><button className="py-2 rounded-lg px-4 bg-blue-600 text-white">
+              {t('cardBtn')}</button></Link>
 
            </div>
         </motion.div>

@@ -3,16 +3,18 @@ import Card from "../Card";
 import LoaderSpinner from "../LoaderSpinner";
 import { Link } from "react-router";
 import { motion } from "motion/react";
+import { useTranslation } from "react-i18next";
 
 const RecentPost = ({ postData, loading }) => {
+  const {t } = useTranslation();
+
   return (
     <div className="my-20 lg:my-28">
       <h1 className="text-center text-2xl md:text-4xl font-bold mb-6 ">
-        Latest Find & Lost Items
+        {t('recenth1')}
       </h1>
       <p className="md:text-xl text-center font-semibold mb-12 lg:mb-12 text-gray-600">
-        The Latest Find & Lost Items section is a feature that displays recently
-        reported lost or found items
+        {t('recentdesc')}
       </p>
       {loading ? (
         <LoaderSpinner></LoaderSpinner>
@@ -32,7 +34,8 @@ const RecentPost = ({ postData, loading }) => {
             whileInView={{ scale: [0, 1] }} 
             transition={{ duration: 1 }} 
             viewport={{ once: false, amount: 0.5 }}
-             className="bg-blue-600 rounded-lg py-3 px-8 text-white font-medium">See all Post</motion.button></Link>
+             className="bg-blue-600 rounded-lg py-3 px-8 text-white font-medium">
+             {t("recentAllBtn")}</motion.button></Link>
           </div>
         </div>
       )}

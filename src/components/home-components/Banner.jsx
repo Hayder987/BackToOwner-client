@@ -7,8 +7,10 @@ import banner1 from "../../assets/images/banner-1.jpg";
 import banner2 from "../../assets/images/banner-2.jpg";
 import banner3 from "../../assets/images/banner-3.jpg";
 import banner4 from "../../assets/images/banner-4.jpg";
+import { useTranslation } from "react-i18next";
 
 const Banner = () => {
+  const { t } = useTranslation();
   return (
     <div className="mt-6">
       <Swiper
@@ -22,30 +24,34 @@ const Banner = () => {
         speed={1000}
       >
         <SwiperSlide>
-          <Slider banner={banner1} 
-          header="Lost It? Find It!" 
-          desc="Easily search or report lost and found items. Let’s bring belongings back to their rightful owners!"
+          <Slider
+            banner={banner1}
+            header={`${t("slide1h1")}`}
+            desc={`${t("slide1p1")}`}
           ></Slider>
         </SwiperSlide>
 
         <SwiperSlide>
-          <Slider banner={banner2}
-          header="Your Gateway to Lost and Found" 
-          desc="Connecting people with their lost treasures. Together, we make finding simple and effective"
+          <Slider
+            banner={banner2}
+            header={`${t("slide2h1")}`}
+            desc={`${t("slide2p1")}`}
           ></Slider>
         </SwiperSlide>
 
         <SwiperSlide>
-          <Slider banner={banner3}
-          header="Reconnecting Pets with Their Precious Belongings" 
-          desc="Your pet’s lost item is just a search away. Join our mission to reunite every pet with what they need most."
+          <Slider
+            banner={banner3}
+            header={`${t("slide3h1")}`}
+            desc={`${t("slide3p1")}`}
           ></Slider>
         </SwiperSlide>
 
         <SwiperSlide>
-          <Slider banner={banner4}
-          header="Lost Something? We've Got Your Back!" 
-          desc="From misplaced keys to lost pets, we help bridge the gap between lost and found."
+          <Slider
+            banner={banner4}
+            header={`${t("slide4h1")}`}
+            desc={`${t("slide4p1")}`}
           ></Slider>
         </SwiperSlide>
       </Swiper>
