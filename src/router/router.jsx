@@ -22,7 +22,9 @@ const router = createBrowserRouter([
             {path:'/', element:<Home></Home>},
             {path:'/login', element:<Login></Login>},
             {path:'/register', element:<Register></Register>},
-            {path:'/lostandfound', element:<LostAndFound></LostAndFound>},
+            {path:'/lostandfound', element:<LostAndFound></LostAndFound>,
+            loader:()=> fetch(`${import.meta.env.VITE_serverUrl}/pages`)
+            },
             {path:'/items/:id', element:<PrivateRoute><DetailsPAge></DetailsPAge></PrivateRoute>},
             {path:'/addlostfound', element:<PrivateRoute><AddLostAndFound></AddLostAndFound></PrivateRoute>},
             {path:'/managemyitem', element:<PrivateRoute><ManageMyItem></ManageMyItem></PrivateRoute> },

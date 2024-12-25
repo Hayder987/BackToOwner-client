@@ -1,4 +1,4 @@
-import axios from "axios";
+
 import { useEffect, useState } from "react";
 import { FaBars } from "react-icons/fa";
 import Swal from "sweetalert2";

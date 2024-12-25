@@ -3,7 +3,6 @@ import useUpload from "../hooks/useUpload";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import useAuth from "../hooks/useAuth";
-import axios from "axios";
 import Swal from "sweetalert2";
 import { useNavigate, useParams } from "react-router";
 import LoaderSpinner from "../components/LoaderSpinner";
