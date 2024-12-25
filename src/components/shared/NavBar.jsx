@@ -177,7 +177,7 @@ const NavBar = () => {
                 <select
                   onChange={(e) => changeLanguage(e.target.value)}
                   defaultValue={i18n.language}
-                  className="border rounded-lg outline-none font-semibold border-blue-500  p-1 md:p-3 "
+                  className="border rounded-lg outline-none font-semibold bg-transparent border-blue-500  p-1 md:p-3 "
                 >
                   <option value="en">English</option>
                   <option value="bn">বাংলা</option>
