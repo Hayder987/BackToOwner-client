@@ -9,10 +9,18 @@ import { FiLogIn } from "react-icons/fi";
 import { AiOutlineMenuFold } from "react-icons/ai";
 import { useState } from "react";
 import { RxCross2 } from "react-icons/rx";
+import { useTranslation } from "react-i18next";
 
 const NavBar = () => {
   const { user, userLogOut, loading } = useAuth();
   const [menu, setMenu] = useState(false);
+  
+
+  // translation function
+  const {t, i18n } = useTranslation();
+  const changeLanguage = (lang) => {
+    i18n.changeLanguage(lang);
+  };
 
   const logOutHandler = () => {
     userLogOut()
@@ -40,9 +48,9 @@ const NavBar = () => {
         <img
           src={logo}
           alt=""
-          className="w-12 h-12 md:w-16 md:h-16  rounded-full"
+          className="w-8 h-8 md:w-16 md:h-16  rounded-full"
         />
-        <h1 className="text-xl md:text-3xl font-bold">
+        <h1 className="text-base md:text-3xl font-bold">
           <span className="text-blue-500">Back</span>ToOwner
         </h1>
       </div>
@@ -52,17 +60,22 @@ const NavBar = () => {
           {!menu ? <AiOutlineMenuFold /> : <RxCross2 />}
         </button>
       </div>
-      <div className={`absolute ${menu?'flex':"hidden"} md:hidden z-10 top-20 w-[90%] 
-      rounded-lg p-8 bg-[#040861]`}>
+      <div
+        className={`absolute ${
+          menu ? "flex" : "hidden"
+        } md:hidden z-10 top-20 w-[90%] 
+      rounded-lg p-8 bg-[#040861]`}
+      >
         <ul
-        onClick={()=>setMenu(!menu)}
-         className="flex flex-col gap-4 text-white ">
+          onClick={() => setMenu(!menu)}
+          className="flex flex-col gap-4 text-white "
+        >
           <NavLink to="/">
             <li className="flex items-center gap-1">
               <span>
                 <IoHome />
               </span>
-              Home
+              {t('menu1')}
             </li>
           </NavLink>
           <NavLink to="/lostandfound">
@@ -70,7 +83,7 @@ const NavBar = () => {
               <span>
                 <SiIconfinder />
               </span>{" "}
-              Lost & Found Items
+              {t('menu2')}
             </li>
           </NavLink>
         </ul>
@@ -83,7 +96,7 @@ const NavBar = () => {
               <span>
                 <IoHome />
               </span>
-              Home
+              {t('menu1')}
             </li>
           </NavLink>
           <NavLink to="/lostandfound">
@@ -91,71 +104,82 @@ const NavBar = () => {
               <span>
                 <SiIconfinder />
               </span>{" "}
-              Lost & Found Items
+              {t('menu2')}
             </li>
           </NavLink>
         </ul>
         {loading ? (
           ""
         ) : (
-          <div>
-            {user ? (
-              <div className="flex justify-center py-1 px-2 rounded-xl border border-blue-500 items-center gap-3">
-                <div className="dropdown">
-                  <div
-                    tabIndex={0}
-                    role="button"
-                    className="rounded-full border p-1"
-                  >
-                    <img
-                      data-tooltip-id="my-tooltip"
-                      data-tooltip-content={user?.displayName}
-                      referrerPolicy="no-referrer"
-                      src={user?.photoURL}
-                      alt=""
-                      className="w-6 h-6 md:w-8 md:h-8 rounded-full"
-                    />
-                  </div>
-                  <ul
-                    tabIndex={0}
-                    className="dropdown-content font-medium gap-4
+          <div className="flex justify-center items-center gap-4">
+            <div>
+              {user ? (
+                <div className="flex justify-center py-1 px-1 md:px-2 rounded-xl border border-blue-500 items-center gap-3">
+                  <div className="dropdown">
+                    <div
+                      tabIndex={0}
+                      role="button"
+                      className="rounded-full border p-1"
+                    >
+                      <img
+                        data-tooltip-id="my-tooltip"
+                        data-tooltip-content={user?.displayName}
+                        referrerPolicy="no-referrer"
+                        src={user?.photoURL}
+                        alt=""
+                        className="w-5 h-5 md:w-8 md:h-8 rounded-full"
+                      />
+                    </div>
+                    <ul
+                      tabIndex={0}
+                      className="dropdown-content font-medium gap-4
                      menu top-16 right-0 rounded-xl bg-blue-100 
                       z-10 w-64 max-w-[300px] text-base p-4 shadow"
-                  >
-                    <NavLink to="/addlostfound">
-                      <li>Add Lost & Found Item</li>
-                    </NavLink>
-                    <NavLink to="/allrecovered">
-                      <li>All Recovered Items</li>
-                    </NavLink>
-                    <NavLink to="/managemyitem">
-                      <li>Manage My Items </li>
-                    </NavLink>
-                  </ul>
+                    >
+                      <NavLink to="/addlostfound">
+                        <li>Add Lost & Found Item</li>
+                      </NavLink>
+                      <NavLink to="/allrecovered">
+                        <li>All Recovered Items</li>
+                      </NavLink>
+                      <NavLink to="/managemyitem">
+                        <li>Manage My Items </li>
+                      </NavLink>
+                    </ul>
+                  </div>
+                  <div className="flex items-center">
+                    <button
+                      onClick={logOutHandler}
+                      data-tooltip-id="my-tooltip"
+                      data-tooltip-content="Log-Out!"
+                      className="text-xl md:text-3xl text-blue-500"
+                    >
+                      <LuLogOut />
+                    </button>
+                  </div>
                 </div>
+              ) : (
                 <div className="">
-                  <button
-                    onClick={logOutHandler}
-                    data-tooltip-id="my-tooltip"
-                    data-tooltip-content="Log-Out!"
-                    className="text-2xl md:text-3xl text-blue-500"
-                  >
-                    <LuLogOut />
-                  </button>
+                  <Link to="/login">
+                    <button className="py-3 flex items-center gap-2 px-5 rounded-lg bg-blue-600 text-white font-semibold">
+                      <span className="text-xl">
+                        <FiLogIn />
+                      </span>
+                      Login
+                    </button>
+                  </Link>
                 </div>
-              </div>
-            ) : (
-              <div className="">
-                <Link to="/login">
-                  <button className="py-3 flex items-center gap-2 px-5 rounded-lg bg-blue-600 text-white font-semibold">
-                    <span className="text-xl">
-                      <FiLogIn />
-                    </span>
-                    Login
-                  </button>
-                </Link>
-              </div>
-            )}
+              )}
+            </div>
+            <div className=" border-2 outline-none font-semibold border-blue-600 rounded-lg p-1 md:p-3 ">
+              <select
+                onChange={(e) => changeLanguage(e.target.value)}
+                defaultValue={i18n.language}
+              >
+                <option value="en">English</option>
+                <option value="bn">বাংলা</option>
+              </select>
+            </div>
           </div>
         )}
       </div>
