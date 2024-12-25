@@ -9,6 +9,7 @@ import useAuth from "../hooks/useAuth";
 import NoData from "../components/NoData";
 import { CgMenuGridR } from "react-icons/cg";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet";
 
 const AllRecovered = () => {
   const [post, setPost] = useState([]);
@@ -34,6 +35,9 @@ const AllRecovered = () => {
 
   return (
     <div className="p-4 md:p-8 mb-12">
+      <Helmet>
+        <title>All Recovered || BackToOwner</title>
+      </Helmet>
      <div className="container mx-auto bg-white p-4 md:p-8">
         {loading ? (
           <LoaderSpinner></LoaderSpinner>

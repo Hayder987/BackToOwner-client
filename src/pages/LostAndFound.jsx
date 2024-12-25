@@ -6,6 +6,7 @@ import Card from "../components/Card";
 import NoData from "../components/NoData";
 import { useLoaderData } from "react-router";
 import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
+import { Helmet } from "react-helmet";
 
 const LostAndFound = () => {
   const [postData, setPostData] = useState([]);
@@ -18,7 +19,7 @@ const LostAndFound = () => {
   const totalPages = Math.ceil(count/itemPerPage)
   const [currentPage, setCurrentPage] = useState(0)
   const page = [...Array(totalPages).keys()]
-  console.log(currentPage)
+ 
   
 
 
@@ -47,6 +48,9 @@ const LostAndFound = () => {
 
   return (
     <div className="py-8 mb-12">
+      <Helmet>
+        <title>lost & found || BackToOwner</title>
+      </Helmet>
       {loading ? (
         <LoaderSpinner></LoaderSpinner>
       ) : (

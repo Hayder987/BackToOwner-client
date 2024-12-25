@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import LoaderSpinner from "../components/LoaderSpinner";
 import CardDetails from "../components/CardDetails";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet";
 
 
 const DetailsPAge = () => {
@@ -35,6 +36,9 @@ const DetailsPAge = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>Detail || BackToOwner</title>
+            </Helmet>
            {
             loading?<LoaderSpinner></LoaderSpinner>:
             <div className="p-6 md:p-12 ">

@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import AboutSection from "../components/home-components/AboutSection";
 import OurServices from "../components/home-components/OurServices";
 import StatusBar from "../components/home-components/StatusBar";
+import { Helmet } from "react-helmet";
 
 const Home = () => {
   const [postData, setPostData] = useState([]);
@@ -30,6 +31,9 @@ const Home = () => {
   
   return (
     <div>
+      <Helmet>
+        <title>Home || BackToOwner</title>
+      </Helmet>
       <Banner></Banner>
       <div className="container mx-auto">
         <RecentPost postData={postData} loading={loading}></RecentPost>

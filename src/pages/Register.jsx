@@ -6,6 +6,7 @@ import Lottie from "react-lottie";
 import useAuth from "../hooks/useAuth";
 import Swal from "sweetalert2";
 import { useState } from "react";
+import { Helmet } from "react-helmet";
 
 const Register = () => {
   const { registerUser, updateUser, googleLogin } = useAuth();
@@ -96,6 +97,9 @@ const Register = () => {
 
   return (
     <div className="p-4 lg:p-8 mb-12">
+      <Helmet>
+        <title>Register || BackToOwner</title>
+      </Helmet>
       <div className="flex p-4 rounded-xl bg-white md:p-12 gap-10 flex-col-reverse lg:flex-row lg:max-w-[1100px] mx-auto">
         {/* form */}
         <div className="lg:w-1/2  p-4 md:p-8">

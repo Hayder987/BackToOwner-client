@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import { useNavigate, useParams } from "react-router";
 import LoaderSpinner from "../components/LoaderSpinner";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet";
 
 const UpdatePage = () => {
   const { id } = useParams();
@@ -80,6 +81,9 @@ const UpdatePage = () => {
 
   return (
     <div className="p-4 md:p-8 mb-12">
+      <Helmet>
+        <title>Update post || BackToOwner</title>
+      </Helmet>
       {
         loading? <LoaderSpinner></LoaderSpinner>:
         <div className="flex shadow-md flex-col rounded-lg lg:flex-row gap-8 lg:max-w-[1200px] bg-white mx-auto p-4 md:p-8">

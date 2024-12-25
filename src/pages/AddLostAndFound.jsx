@@ -6,6 +6,7 @@ import banner from '../assets/images/addbanner-2.jpg'
 import useAuth from "../hooks/useAuth";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet";
 
 const AddLostAndFound = () => {
   const { handleImageChange, handleUpload, uploadedUrl,setUploadedUrl, setSelectedImage } = useUpload();
@@ -68,6 +69,9 @@ const AddLostAndFound = () => {
 
   return (
     <div className="p-4 md:p-8 mb-12">
+      <Helmet>
+        <title>Add Post || BackToOwner</title>
+      </Helmet>
       <div className="flex shadow-md flex-col rounded-lg lg:flex-row gap-8 lg:max-w-[1200px] bg-white mx-auto p-4 md:p-8">
         {/* form */}
         <div className="w-full lg:w-7/12">

@@ -11,6 +11,7 @@ import { Link, useNavigate } from "react-router";
 import NoData from "../components/NoData";
 import { motion } from "motion/react";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet";
 
 const ManageMyItem = () => {
   const { user } = useAuth();
@@ -64,6 +65,9 @@ const ManageMyItem = () => {
 
   return (
     <div className="p-4 md:p-8 mb-12">
+      <Helmet>
+        <title>My Items || BackToOwner</title>
+      </Helmet>
       {loading ? (
         <LoaderSpinner></LoaderSpinner>
       ) : (
