@@ -44,7 +44,7 @@ const NavBar = () => {
   };
 
   return (
-    <div className="sticky bg-slate-50 top-0 z-50 bg-opacity-70 backdrop-blur-lg backdrop-opacity-60">
+    <div className="sticky bg-slate-50 top-0 z-20 bg-opacity-70 backdrop-blur-lg backdrop-opacity-60">
       <div className="flex justify-between items-center relative py-3 px-4 md:px-12">
         <div className=" flex justify-center items-center gap-2 ">
           <img

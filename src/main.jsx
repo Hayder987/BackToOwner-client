@@ -17,7 +17,7 @@ createRoot(document.getElementById("root")).render(
           <RouterProvider router={router}></RouterProvider>
           <Tooltip
             id="my-tooltip"
-            className="!bg-blue-600 !text-white !rounded-md !px-4"
+            className="!bg-blue-600 !text-white !z-50 !rounded-md !px-4"
           />
         </UtilitiesProvider>
       </AuthProvider>
