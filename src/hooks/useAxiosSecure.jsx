@@ -17,15 +17,15 @@ const useAxiosSecure = () => {
       },
       (error) => {
         if (error.status === 401 || error.status === 403) {
-          userLogOut().then(() => {
-            Swal.fire({
-              position: "top-middle",
-              icon: "info",
-              title: "UnAuthorized: Your get SignOut",
-              showConfirmButton: false,
-              timer: 1500,
-            });
-          });
+          // userLogOut().then(() => {
+          //   Swal.fire({
+          //     position: "top-middle",
+          //     icon: "info",
+          //     title: "UnAuthorized: Your get SignOut",
+          //     showConfirmButton: false,
+          //     timer: 1500,
+          //   });
+          // });
         }
         return Promise.reject(error);
       }

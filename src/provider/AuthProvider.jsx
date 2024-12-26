@@ -48,7 +48,7 @@ const AuthProvider = ({children}) => {
           axios.post(`${import.meta.env.VITE_serverUrl}/logOut`,{},
             {withCredentials:true}
           )
-          
+          setLoading(false) 
         }
 
         setLoading(false)

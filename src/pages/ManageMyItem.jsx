@@ -12,6 +12,7 @@ import NoData from "../components/NoData";
 import { motion } from "motion/react";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import { Helmet } from "react-helmet";
+import axios from "axios";
 
 const ManageMyItem = () => {
   const { user } = useAuth();
@@ -48,8 +49,8 @@ const ManageMyItem = () => {
       confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        await axiosUrl
-          .delete(`/postId/${id}`)
+        await axios
+          .delete(`${import.meta.env.VITE_serverUrl}/postId/${id}`)
           .then(() => {
             const remaing = postData.filter((item) => item._id !== id);
             setPostData(remaing);

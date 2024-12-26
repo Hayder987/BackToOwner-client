@@ -9,6 +9,7 @@ import LoaderSpinner from "../components/LoaderSpinner";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import { Helmet } from "react-helmet";
 import { useTranslation } from "react-i18next";
+import axios from "axios";
 
 const UpdatePage = () => {
   const { id } = useParams();
@@ -60,8 +61,8 @@ const UpdatePage = () => {
     };
 
 
-    await axiosUrl
-      .patch(`/updateItems/${id}`, updateData)
+    await axios
+      .patch(`${import.meta.env.VITE_serverUrl}/updateItems/${id}`, updateData)
       .then(() => {
         Swal.fire({
           position: "top-end",
