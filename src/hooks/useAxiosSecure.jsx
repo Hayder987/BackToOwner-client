@@ -1,7 +1,8 @@
 import axios from "axios";
 import { useEffect } from "react";
-import Swal from "sweetalert2";
 import useAuth from "./useAuth";
+import { useNavigate } from "react-router";
+import Swal from "sweetalert2";
 
 const axiosInstance = axios.create({
   baseURL: `${import.meta.env.VITE_serverUrl}`,
@@ -10,6 +11,7 @@ const axiosInstance = axios.create({
 
 const useAxiosSecure = () => {
   const { userLogOut } = useAuth();
+  const navigate = useNavigate()
   useEffect(() => {
     axiosInstance.interceptors.response.use(
       (response) => {
@@ -17,20 +19,17 @@ const useAxiosSecure = () => {
       },
       (error) => {
         if (error.status === 401 || error.status === 403) {
-          // userLogOut().then(() => {
-          //   Swal.fire({
-          //     position: "top-middle",
-          //     icon: "info",
-          //     title: "UnAuthorized: Your get SignOut",
-          //     showConfirmButton: false,
-          //     timer: 1500,
-          //   });
-          // });
+         navigate('/')
+         Swal.fire({
+          title: "UnAuthorized",
+          text: "You need Logout And Login First",
+          icon: "error"
+        });
         }
         return Promise.reject(error);
       }
     );
-  }, [userLogOut]);
+  }, [userLogOut, navigate]);
   return axiosInstance;
 };
 
