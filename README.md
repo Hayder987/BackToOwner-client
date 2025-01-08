@@ -95,3 +95,57 @@ Here’s a list of the key npm packages used in this project:
 ---
 
 
+## 🖥️ Running the Project Locally
+Follow these steps to run BackToOwner on your local machine:
+
+### Prerequisites
+- Install [Node.js](https://nodejs.org/).
+- Install [Git](https://git-scm.com/).
+
+### Steps
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/Hayder987/BackToOwner-client
+   ```
+
+2. **Navigate to the project directory:**
+   ```bash
+   cd backtoowner
+   ```
+
+3. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+4. **Run the application:**
+   ```bash
+   npm run dev
+   ```
+
+5. Open your browser and go to `http://localhost:5173` to view the app.
+
+---
+
+## 🌐 Live Demo
+Check out the live version of BackToOwner [here](https://backtoowner-b5097.web.app/).
+
+---
+
+## 🔗 Relevant Links
+- **GitHub client Repository:** [GitHub client Repository:](https://github.com/Hayder987/BackToOwner-client)
+- **GitHub Server Repository:** [GitHub Server Repository:](https://github.com/Hayder987/BackToOwner-server)
+
+---
+
+Thank you for exploring **BackToOwner**! We hope this platform helps reconnect lost items with their rightful owners. 🙌
+
+## Give Me FeedBack On
+
+### (https://hayder-ali.web.app/)
+
+
+
+
+
+
