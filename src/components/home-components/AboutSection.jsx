@@ -63,7 +63,7 @@ const AboutSection = () => {
             }}
             src={client1}
             alt=""
-            className="w-full max-w-[500px] max-h-[250px] rounded-t-[32px] rounded-br-[32px] border-l-8 border-b-8 border-blue-500"
+            className="w-full max-w-[500px] max-h-[250px] rounded-t-[32px] rounded-br-[32px] border-l-8 border-b-8 border-blue-600"
           />
 
           <motion.img
@@ -76,7 +76,7 @@ const AboutSection = () => {
             }}
             src={client2}
             alt=""
-            className="w-full max-w-[450px] max-h-[250px] rounded-t-[32px] rounded-br-[32px] border-l-8 border-b-8 border-blue-500"
+            className="w-full max-w-[450px] max-h-[250px] rounded-t-[32px] rounded-br-[32px] border-l-8 border-b-8 border-blue-600"
           />
         </div>
       </div>

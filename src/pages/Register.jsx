@@ -121,7 +121,7 @@ const Register = () => {
                   type="Text"
                   name="name"
                   placeholder={`${t("name")}`}
-                  className="border border-blue-500 rounded-xl p-3 outline-none "
+                  className="border border-blue-600 rounded-xl p-3 outline-none "
                   required
                 />
               </div>
@@ -133,7 +133,7 @@ const Register = () => {
                   type="email"
                   name="email"
                   placeholder={`${t("email")}`}
-                  className="border border-blue-500 rounded-xl p-3 outline-none "
+                  className="border border-blue-600 rounded-xl p-3 outline-none "
                   required
                 />
               </div>
@@ -145,7 +145,7 @@ const Register = () => {
                   type="Text"
                   name="imgPath"
                   placeholder={`${t("photoUrl")}`}
-                  className="border border-blue-500 rounded-xl p-3 outline-none "
+                  className="border border-blue-600 rounded-xl p-3 outline-none "
                   required
                 />
               </div>
@@ -157,7 +157,7 @@ const Register = () => {
                   type="password"
                   name="password"
                   placeholder={`${t("password")}`}
-                  className="border border-blue-500 rounded-xl p-3 outline-none "
+                  className="border border-blue-600 rounded-xl p-3 outline-none "
                   required
                 />
                 {errorMesage && (
@@ -178,7 +178,7 @@ const Register = () => {
             <div className="flex justify-center mt-4">
               <button
                 onClick={googleLoginHandler}
-                className="flex border font-semibold border-blue-500 w-full py-3 px-6 rounded-xl justify-center items-center gap-4"
+                className="flex border font-semibold border-blue-600 w-full py-3 px-6 rounded-xl justify-center items-center gap-4"
               >
                 <span className="text-2xl">
                   <FcGoogle />

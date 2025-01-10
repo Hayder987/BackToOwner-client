@@ -52,7 +52,7 @@ const NavBar = () => {
             className="w-8 h-8 md:w-16 md:h-16  rounded-full"
           />
           <h1 className="text-base md:text-3xl font-bold">
-            <span className="text-blue-500">Back</span>ToOwner
+            <span className="text-blue-600">Back</span>ToOwner
           </h1>
         </div>
 
@@ -115,7 +115,7 @@ const NavBar = () => {
             <div className="flex justify-center items-center gap-4">
               <div>
                 {user ? (
-                  <div className="flex justify-center py-1 px-1 md:px-2 rounded-xl border border-blue-500 items-center gap-3">
+                  <div className="flex justify-center py-1 px-1 md:px-2 rounded-xl border border-blue-600 items-center gap-3">
                     <div className="dropdown">
                       <div
                         tabIndex={0}
@@ -153,7 +153,7 @@ const NavBar = () => {
                         onClick={logOutHandler}
                         data-tooltip-id="my-tooltip"
                         data-tooltip-content="Log-Out!"
-                        className="text-xl md:text-3xl text-blue-500"
+                        className="text-xl md:text-3xl text-blue-600"
                       >
                         <LuLogOut />
                       </button>
@@ -176,7 +176,7 @@ const NavBar = () => {
                 <select
                   onChange={(e) => changeLanguage(e.target.value)}
                   defaultValue={i18n.language}
-                  className="border rounded-lg outline-none font-semibold bg-transparent border-blue-500  p-1 md:p-3 "
+                  className="border rounded-lg outline-none font-semibold bg-transparent border-blue-600  p-1 md:p-3 "
                 >
                   <option value="en">English</option>
                   <option value="bn">বাংলা</option>

@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import useUpload from "../hooks/useUpload";
+
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import banner from '../assets/images/addbanner-2.jpg'
@@ -8,18 +7,26 @@ import Swal from "sweetalert2";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import { Helmet } from "react-helmet";
 import { useTranslation } from "react-i18next";
+import { useEffect, useState } from "react";
+import { uploadImage } from "../api/utilities";
 
 const AddLostAndFound = () => {
-  const { handleImageChange, handleUpload, uploadedUrl,setUploadedUrl, setSelectedImage } = useUpload();
   const [startDate, setStartDate] = useState(new Date());
   const {user} = useAuth()
   const axiosUrl = useAxiosSecure()
   const { t } = useTranslation();
-  
-  useEffect(()=>{
-    setUploadedUrl('')
-    setSelectedImage(null)
-  },[setUploadedUrl, setSelectedImage])
+  const [imgPath, setImgPath] = useState(null)
+  const [loading, setLoading] = useState(false)
+  const [imgPreview, setImgPreview] = useState('')
+
+  useEffect(() => {
+    if (imgPath) {
+      const imageURL = URL.createObjectURL(imgPath);
+      setImgPreview(imageURL);
+      return () => URL.revokeObjectURL(imageURL);
+    }
+  }, [imgPath, setImgPreview]);
+
 
   const postFormHandler = async(e) => {
     e.preventDefault();
@@ -32,6 +39,8 @@ const AddLostAndFound = () => {
     const name = form.name.value;
     const email = form.email.value;
     const today = new Date()
+    setLoading(true)
+    const photo = await uploadImage(imgPath)
 
     const postData ={
       title,
@@ -42,7 +51,7 @@ const AddLostAndFound = () => {
       name,
       email,
       lostDate:startDate,
-      thumbnail:uploadedUrl,
+      thumbnail:photo,
       postedDate : today
     }
 
@@ -57,13 +66,12 @@ const AddLostAndFound = () => {
       });
       form.reset()
       setStartDate(new Date())
-      setUploadedUrl('')
-      setSelectedImage(null)
+      setImgPath(null)
+      setLoading(false)
     })
     .catch(err=>{
       Swal.fire(`${err}`);
     })
-
     
   };
 
@@ -95,19 +103,21 @@ const AddLostAndFound = () => {
                 />
               </div>
               <div className="form-control w-full">
-                <label className="label">
-                  <span className="label-text">{t('upload')}</span>
-                </label>
-                <div className="flex flex-col lg:flex-row gap-4">
-                  <input
+                <label className=" flex justify-start flex-col">
+                <div className="border-dashed p-1 rounded-lg mt-8 border-2 border-blue-600">
+                   <p className="cursor-pointer text-center bg-blue-600 rounded-lg text-white p-2">
+                    Upload Image
+                   </p>
+                 </div>
+                    <input
                     type="file"
                     required
                     accept="image/*"
-                    onChange={handleImageChange}
-                    onMouseLeave={() => handleUpload()}
-                    className="file-input file-input-primary w-full "
+                    onChange={(e)=> setImgPath(e.target.files[0])}
+                    className="file-input hidden file-input-primary w-full "
                   />
-                </div>
+                </label>
+                
               </div>
             </div>
             <div className="flex flex-col md:flex-row justify-center gap-6">
@@ -164,7 +174,7 @@ const AddLostAndFound = () => {
                   type="text"
                   name="location"
                   placeholder={`${t('locationDesc')}`}
-                  className="input rounded-none input-bordered input-primary"
+                  className="input rounded-lg input-bordered input-primary"
                   required
                 />
               </div>
@@ -206,13 +216,14 @@ const AddLostAndFound = () => {
                 />
               </div>
             </div>
-
-            <input type="submit" value={`${t('addBtn')}`} className="w-full rounded-lg bg-blue-600 text-white py-3 px-6" />
+            <p className="text-center text-blue-600">{loading? "Uploading....": ""}</p>
+            <input type="submit" value={`${t('addBtn')}`} className="w-full cursor-pointer rounded-lg bg-blue-600 text-white py-3 px-6" />
+            
           </form>
         </div>
         {/* banner */}
         <div className="w-full hidden lg:flex lg:w-5/12">
-        <img src={uploadedUrl?uploadedUrl:banner} alt="" className={`w-full rounded-lg ${uploadedUrl?'h-[100%]':"h-[85%]"}`} />
+        <img src={imgPath?imgPreview:banner} alt="" className={`w-full  rounded-lg `} />
         </div>
       </div>
     </div>

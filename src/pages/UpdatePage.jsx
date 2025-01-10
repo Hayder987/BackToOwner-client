@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import useUpload from "../hooks/useUpload";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import useAuth from "../hooks/useAuth";
@@ -15,7 +14,6 @@ const UpdatePage = () => {
   const { id } = useParams();
   const [post, setPost] = useState({});
   const { user } = useAuth();
-  const { handleImageChange, handleUpload, uploadedUrl,setUploadedUrl, setSelectedImage } = useUpload();
   const [startDate, setStartDate] = useState(new Date());
   const [loading, setLoading] = useState(true)
   const navigate = useNavigate()
@@ -57,7 +55,7 @@ const UpdatePage = () => {
       name,
       email,
       lostDate: startDate,
-      thumbnail: uploadedUrl?uploadedUrl:post?.thumbnail      ,
+      thumbnail:   ""
     };
 
 
@@ -73,8 +71,6 @@ const UpdatePage = () => {
         });
         form.reset();
         navigate('/managemyitem')
-        setUploadedUrl()
-        setSelectedImage(null)
       })
       .catch((err) => {
         Swal.fire(`${err}`);
@@ -119,8 +115,7 @@ const UpdatePage = () => {
                   <input
                     type="file"
                     accept="image/*"
-                    onChange={handleImageChange}
-                    onMouseLeave={() => handleUpload()}
+                    // onChange={handleImageChange}
                     className="file-input file-input-primary w-full "
                   />
                 </div>
@@ -233,7 +228,7 @@ const UpdatePage = () => {
         {/* banner */}
         <div className="w-full hidden lg:flex lg:w-5/12">
           <img
-            src={uploadedUrl ? uploadedUrl : post?.thumbnail}
+            src={ post?.thumbnail}
             alt=""
             className="w-full h-[100%] rounded-lg "
           />
