@@ -16,6 +16,7 @@ import Dashboard from "../pages/Dashboard";
 import AllItems from "../pages/dashBoard/AllItems";
 import AllUser from "../pages/dashBoard/AllUser";
 import AllRecoveredItem from "../pages/dashBoard/AllRecoveredItem";
+import AdminPrivate from "../private/AdminPrivate";
 
 
 const router = createBrowserRouter([
@@ -38,9 +39,9 @@ const router = createBrowserRouter([
             {path:'/allrecovered', element:<PrivateRoute><AllRecovered></AllRecovered></PrivateRoute>},
             {path:'dashboard', element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
                 children:[
-                    {path:'allItems', element:<AllItems></AllItems>},
-                    {path:'allRecoverd', element:<AllRecoveredItem></AllRecoveredItem>},
-                    {path:'allUser', element:<AllUser></AllUser>}
+                    {path:'allItems', element:<AdminPrivate><AllItems></AllItems></AdminPrivate>},
+                    {path:'allRecoverd', element:<AdminPrivate><AllRecoveredItem></AllRecoveredItem></AdminPrivate>},
+                    {path:'allUser', element:<AdminPrivate><AllUser></AllUser></AdminPrivate>}
                 ]
             }
 

@@ -17,7 +17,6 @@ const Dashboard = () => {
     return <LoaderSpinner></LoaderSpinner>;
   }
 
-  console.log(userData);
 
   const updateRoleHandler = async () => {
     axiosUrl.patch(`/userRole/${user?.email}?role=requested`);

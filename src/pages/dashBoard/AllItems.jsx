@@ -65,7 +65,7 @@ const AllItems = () => {
             </thead>
             <tbody>
               {allData?.map((item, idx) => (
-                <tr key={item?.idx}>
+                <tr key={item?._id}>
                   <th>{idx + 1}</th>
                   <td>{item?.title}</td>
                   <td>
