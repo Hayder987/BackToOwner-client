@@ -64,6 +64,21 @@
   "getDate" : "Date Lost or Found",
   "contact" : "Contact Information",
   "addBtn" : "Add Post",
-  "updateBtn" : "Update Post"
-  
+  "updateBtn" : "Update Post",
+  "faqTitle" : "Frequently Asked Questions",
+  "faqDes" : "At BackToOwner, we understand you might have questions about how our platform works. Here are some commonly asked questions and their answers to help you get started. If you have more queries, feel free to contact us!",
+  "FaqQ1" : "What is BackToOwner?",
+  "faqA1" : "BackToOwner is a platform designed to help people find and return lost or found items. Whether you've lost something valuable or discovered an item, our platform connects you to the right people.",
+  "faqQ2": "How do I post a lost or found item?",
+  "faqA2": "To post a lost or found item, simply log in, click on the \"Add Post\" button, fill in the required details, and upload an image if available. Once submitted, your post will be visible to other users.",
+  "faqQ3": "Is BackToOwner free to use?",
+  "faqA3": "Yes, BackToOwner is completely free to use for posting, searching, and connecting with others about lost and found items.",
+  "faqQ4": "Do I need to create an account to use the website?",
+  "faqA4": "Yes, creating an account allows you to post items, track your submissions, and communicate securely with other users.",
+  "faqQ5": "How can I ensure my contact information is secure?",
+  "faqA5": "Your privacy is our priority. We only display essential contact information, and you can choose to use our messaging system for communication without sharing personal details.",
+  "faqQ6": "What types of items can I post on BackToOwner?",
+  "faqA6": "You can post various categories of items, including gadgets, pets, documents, home items, and more. Choose the appropriate category when creating your post.",
+  "faqQ7": "What should I do if I find a lost item?",
+  "faqA7": "If you find a lost item, create a post under the \"Found\" category with accurate details and photos. This helps the rightful owner identify and claim their belonging."
 }
