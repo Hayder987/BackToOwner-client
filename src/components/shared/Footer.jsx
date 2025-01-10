@@ -1,43 +1,66 @@
-
-import logo from '../../assets/images/logo3.jpg'
+import logo from "../../assets/images/logo3.jpg";
+import { FaFacebook, FaGithub } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
   return (
-    <div className='bg-blue-100'>
-      <footer className="footer text-base-content p-10">
-        <aside>
-          <img src={logo} alt="" className="w-16 h-16 rounded-full" />
-          <p className='text-base font-medium'>
-            BackToOwner
-            <br />
-            Providing reliable service since 2019
+    <div className="bg-[#acd5f0]">
+      <footer className="footer flex text-black justify-center items-center bg-blue-20 px-4 py-10 md:py-16">
+        <div className="flex flex-col justify-center items-center">
+          {/* logo */}
+          <div className="flex mb-8 justify-center items-center gap-2">
+            <img src={logo} alt="" className="w-16 h-16 rounded-2xl" />
+            <h1 className="text-xl md:text-3xl font-bold text-gray-800">
+              <span className="text-blue-600">Back</span>ToOwner
+            </h1>
+          </div>
+          {/* desc */}
+          <p className="text-center w-full text-gray-700 md:w-9/12 lg:w-7/12 mx-auto text-xl">
+            Every lost item has a story. BackToOwner helps bring those stories
+            back to life. Reconnect with your cherished belongings today!
           </p>
-        </aside>
-        <nav>
-          <h6 className="footer-title">Services</h6>
-          <a className="link link-hover">Branding</a>
-          <a className="link link-hover">Design</a>
-          <a className="link link-hover">Marketing</a>
-          <a className="link link-hover">Advertisement</a>
-        </nav>
-        <nav>
-          <h6 className="footer-title">Company</h6>
-          <a className="link link-hover">About us</a>
-          <a className="link link-hover">Contact</a>
-          <a className="link link-hover">Jobs</a>
-          <a className="link link-hover">Press kit</a>
-        </nav>
-        <nav>
-          <h6 className="footer-title">Legal</h6>
-          <a className="link link-hover">Terms of use</a>
-          <a className="link link-hover">Privacy policy</a>
-          <a className="link link-hover">Cookie policy</a>
-        </nav>
+          {/* links */}
+          <div className="">
+            <div className="text-4xl flex items-center gap-6 mt-8">
+              <button
+                onClick={() => {
+                  window.open(
+                    "https://www.facebook.com/profile.php?id=100006202260978",
+                    "_blank"
+                  );
+                }}
+                className="hover:text-[#0370ff]"
+              >
+                <FaFacebook />
+              </button>
+              <button
+                onClick={() => {
+                  window.open("https://github.com/Hayder987", "_blank");
+                }}
+                className="hover:text-[#0370ff]"
+              >
+                <FaGithub />
+              </button>
+              <button
+                onClick={() => {
+                  window.open("https://x.com/hayder4290", "_blank");
+                }}
+                className="hover:text-[#0370ff]"
+              >
+                <FaXTwitter />
+              </button>
+            </div>
+          </div>
+          {/* author */}
+          <div className="divider"></div>
+          <div className="">
+            <p className="text-xl font-medium">
+              &copy; {new Date().getFullYear()} All rights reserved by Hayder
+              Ali
+            </p>
+          </div>
+        </div>
       </footer>
-      <div className="divider"></div>
-      <div className=" p-4">
-        <p className="text-center font-medium">All Right Reserved @ Hayder Ali 2024</p>
-      </div>
     </div>
   );
 };

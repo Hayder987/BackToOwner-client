@@ -89,7 +89,7 @@ const NavBar = () => {
             </NavLink>
           </ul>
         </div>
-
+         {/* mobile */}
         <div className="flex justify-center items-center gap-4">
           <ul className="hidden lg:flex justify-center items-center gap-10 font-medium">
             <NavLink to="/">
@@ -137,14 +137,15 @@ const NavBar = () => {
                      menu top-16 right-0 rounded-xl bg-blue-100 
                       z-10 w-64 max-w-[300px] text-base p-4 shadow"
                       >
+                        
                         <NavLink to="/addlostfound">
-                          <li>{t("menu3")}</li>
+                          <li className="hover:text-blue-600 hover:underline"> {t("menu3")}</li>
                         </NavLink>
                         <NavLink to="/allrecovered">
-                          <li>{t("menu4")}</li>
+                          <li className="hover:text-blue-600 hover:underline">{t("menu4")}</li>
                         </NavLink>
                         <NavLink to="/managemyitem">
-                          <li>{t("menu5")}</li>
+                          <li className="hover:text-blue-600 hover:underline">{t("menu5")}</li>
                         </NavLink>
                       </ul>
                     </div>
