@@ -13,7 +13,6 @@ import { useTranslation } from "react-i18next";
 import { FaQuestion } from "react-icons/fa";
 import { MdDashboard } from "react-icons/md";
 
-
 const NavBar = () => {
   const { user, userLogOut, loading } = useAuth();
   const [menu, setMenu] = useState(false);
@@ -21,7 +20,7 @@ const NavBar = () => {
   // translation function
   const { t, i18n } = useTranslation();
   const changeLanguage = async (lang) => {
-    localStorage.setItem('lang', lang);
+    localStorage.setItem("lang", lang);
     await i18n.changeLanguage(lang);
   };
 
@@ -74,7 +73,7 @@ const NavBar = () => {
             onClick={() => setMenu(!menu)}
             className="flex flex-col gap-4 text-white "
           >
-             {/* mobile */}
+            {/* mobile */}
             <NavLink to="/">
               <li className="flex items-center gap-1">
                 <span>
@@ -95,10 +94,18 @@ const NavBar = () => {
             <NavLink to="/help">
               <li className="flex items-center gap-1">
                 <span>
-                <FaQuestion />
+                  <FaQuestion />
                 </span>{" "}
                 FAQs
               </li>
+            </NavLink>
+            <NavLink to="dashboard">
+              <button className="flex items-center gap-1">
+                <span>
+                  <MdDashboard />
+                </span>{" "}
+                Dashboard
+              </button>
             </NavLink>
           </ul>
         </div>
@@ -124,7 +131,7 @@ const NavBar = () => {
             <NavLink to="/help">
               <li className="flex items-center gap-1">
                 <span>
-                <FaQuestion />
+                  <FaQuestion />
                 </span>{" "}
                 FAQs
               </li>
@@ -132,7 +139,7 @@ const NavBar = () => {
             <NavLink to="dashboard">
               <button className="flex items-center gap-1">
                 <span>
-                <MdDashboard />
+                  <MdDashboard />
                 </span>{" "}
                 Dashboard
               </button>
@@ -166,15 +173,21 @@ const NavBar = () => {
                      menu top-16 right-0 rounded-xl bg-blue-100 
                       z-10 w-64 max-w-[300px] text-base p-4 shadow"
                       >
-                        
                         <NavLink to="/addlostfound">
-                          <li className="hover:text-blue-600 hover:underline"> {t("menu3")}</li>
+                          <li className="hover:text-blue-600 hover:underline">
+                            {" "}
+                            {t("menu3")}
+                          </li>
                         </NavLink>
                         <NavLink to="/allrecovered">
-                          <li className="hover:text-blue-600 hover:underline">{t("menu4")}</li>
+                          <li className="hover:text-blue-600 hover:underline">
+                            {t("menu4")}
+                          </li>
                         </NavLink>
                         <NavLink to="/managemyitem">
-                          <li className="hover:text-blue-600 hover:underline">{t("menu5")}</li>
+                          <li className="hover:text-blue-600 hover:underline">
+                            {t("menu5")}
+                          </li>
                         </NavLink>
                       </ul>
                     </div>

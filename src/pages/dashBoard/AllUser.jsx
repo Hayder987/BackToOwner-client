@@ -3,6 +3,7 @@ import LoaderSpinner from "../../components/LoaderSpinner";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { RiDeleteBin5Fill } from "react-icons/ri";
+import Swal from "sweetalert2";
 
 const AllUser = () => {
   const axiosUrl = useAxiosSecure();
@@ -24,9 +25,32 @@ const AllUser = () => {
     return <LoaderSpinner></LoaderSpinner>;
   }
 
-  const userHandler = (id, value) => {
-    console.log(id, value);
+  const userHandler = async(email, value) => {
+    await axiosUrl.patch(`/userRole/${email}?role=${value}`) 
+      refetch()
   };
+
+  const deleteHandler = (id)=>{
+     Swal.fire({
+          title: "Are you sure?",
+          text: "You won't be able to revert this!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, delete it!",
+        }).then(async (result) => {
+          if (result.isConfirmed) {
+            await axiosUrl.delete(`/user/${id}`);
+            refetch();
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
+          }
+        });
+  }
 
   return (
     <div>
@@ -81,7 +105,7 @@ const AllUser = () => {
 
                 <td className="flex justify-center items-center gap-6">
                   <select
-                    onChange={(e) => userHandler(item?._id, e.target.value)}
+                    onChange={(e) => userHandler(item?.email, e.target.value)}
                     disabled={item?.role === "client"}
                     className="select select-bordered w-full min-w-40 lg:min-w-16"
                   >
@@ -90,7 +114,7 @@ const AllUser = () => {
                     <option value="admin">Admin</option>
                   </select>
                   <button
-                    // onClick={() => deleteHandler(item?._id)}
+                    onClick={() => deleteHandler(item?._id)}
                     data-tooltip-id="my-tooltip"
                     data-tooltip-content="Delete"
                     className="bg-red-600 text-white p-2 rounded-md text-xl"

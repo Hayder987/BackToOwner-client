@@ -36,7 +36,7 @@ const router = createBrowserRouter([
             {path:'/managemyitem', element:<PrivateRoute><ManageMyItem></ManageMyItem></PrivateRoute> },
             {path:'/updateItems/:id', element: <PrivateRoute><UpdatePage></UpdatePage></PrivateRoute>},
             {path:'/allrecovered', element:<PrivateRoute><AllRecovered></AllRecovered></PrivateRoute>},
-            {path:'dashboard', element:<Dashboard></Dashboard>,
+            {path:'dashboard', element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
                 children:[
                     {path:'allItems', element:<AllItems></AllItems>},
                     {path:'allRecoverd', element:<AllRecoveredItem></AllRecoveredItem>},
