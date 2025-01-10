@@ -11,6 +11,7 @@ import Register from "../pages/Register";
 import PrivateRoute from "../private/PrivateRoute";
 import DetailsPAge from "../pages/DetailsPAge";
 import UpdatePage from "../pages/UpdatePage";
+import FaqPage from "../pages/FaqPage";
 
 
 const router = createBrowserRouter([
@@ -25,11 +26,13 @@ const router = createBrowserRouter([
             {path:'/lostandfound', element:<LostAndFound></LostAndFound>,
             loader:()=> fetch(`${import.meta.env.VITE_serverUrl}/pages`)
             },
+            {path:'/help', element:<FaqPage></FaqPage>},
             {path:'/items/:id', element:<PrivateRoute><DetailsPAge></DetailsPAge></PrivateRoute>},
             {path:'/addlostfound', element:<PrivateRoute><AddLostAndFound></AddLostAndFound></PrivateRoute>},
             {path:'/managemyitem', element:<PrivateRoute><ManageMyItem></ManageMyItem></PrivateRoute> },
             {path:'/updateItems/:id', element: <PrivateRoute><UpdatePage></UpdatePage></PrivateRoute>},
             {path:'/allrecovered', element:<PrivateRoute><AllRecovered></AllRecovered></PrivateRoute>}
+            
 
         ]
     }

@@ -10,6 +10,7 @@ import { AiOutlineMenuFold } from "react-icons/ai";
 import { useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 import { useTranslation } from "react-i18next";
+import { FaQuestion } from "react-icons/fa";
 
 
 const NavBar = () => {
@@ -18,8 +19,9 @@ const NavBar = () => {
 
   // translation function
   const { t, i18n } = useTranslation();
-  const changeLanguage = (lang) => {
-    i18n.changeLanguage(lang);
+  const changeLanguage = async (lang) => {
+    localStorage.setItem('lang', lang);
+    await i18n.changeLanguage(lang);
   };
 
   const logOutHandler = () => {
@@ -43,7 +45,7 @@ const NavBar = () => {
   };
 
   return (
-    <div className="sticky bg-slate-50 top-0 z-20 bg-opacity-70 backdrop-blur-lg backdrop-opacity-60">
+    <div className="sticky bg-slate-50  top-0 z-20 bg-opacity-60 backdrop-blur-md">
       <div className="flex justify-between items-center relative py-3 px-4 md:px-12">
         <div className=" flex justify-center items-center gap-2 ">
           <img
@@ -71,6 +73,7 @@ const NavBar = () => {
             onClick={() => setMenu(!menu)}
             className="flex flex-col gap-4 text-white "
           >
+             {/* mobile */}
             <NavLink to="/">
               <li className="flex items-center gap-1">
                 <span>
@@ -87,9 +90,18 @@ const NavBar = () => {
                 {t("menu2")}
               </li>
             </NavLink>
+
+            <NavLink to="/help">
+              <li className="flex items-center gap-1">
+                <span>
+                <FaQuestion />
+                </span>{" "}
+                FAQs
+              </li>
+            </NavLink>
           </ul>
         </div>
-         {/* mobile */}
+        {/* desktop */}
         <div className="flex justify-center items-center gap-4">
           <ul className="hidden lg:flex justify-center items-center gap-10 font-medium">
             <NavLink to="/">
@@ -106,6 +118,14 @@ const NavBar = () => {
                   <SiIconfinder />
                 </span>{" "}
                 {t("menu2")}
+              </li>
+            </NavLink>
+            <NavLink to="/help">
+              <li className="flex items-center gap-1">
+                <span>
+                <FaQuestion />
+                </span>{" "}
+                FAQs
               </li>
             </NavLink>
           </ul>

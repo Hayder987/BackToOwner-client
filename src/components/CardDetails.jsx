@@ -7,11 +7,11 @@ import Swal from "sweetalert2";
 import PropTypes from "prop-types";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 
-const CardDetails = ({ post , setLoad, load}) => {
+const CardDetails = ({ post, setLoad, load }) => {
   const { user } = useAuth();
   const [startDate, setStartDate] = useState(new Date());
-  const [pickLocation, setpickLocation] = useState('')
-  const axiosUrl = useAxiosSecure()
+  const [pickLocation, setpickLocation] = useState("");
+  const axiosUrl = useAxiosSecure();
 
   const {
     title,
@@ -24,100 +24,104 @@ const CardDetails = ({ post , setLoad, load}) => {
     lostDate,
     thumbnail,
     postedDate,
-    _id
+    _id,
   } = post || {};
 
-  const submitFormHandler = async e =>{
+  const submitFormHandler = async (e) => {
     e.preventDefault();
-    const dataInfo ={
-        postId:_id,
-        pickLocation,
-        pickDate:startDate,
-        recoveredName:user?.displayName,
-        recoveredEmail:user?.email,
-        userImage:user?.photoURL,
-        title,
-        thumbnail,
-        owner:name,
-        category,
-        lostDate
-
-    }
-    try{
-      await axiosUrl.post(`/addData`, dataInfo)
-      .then(()=>{
-        setLoad(!load)
+    const dataInfo = {
+      postId: _id,
+      pickLocation,
+      pickDate: startDate,
+      recoveredName: user?.displayName,
+      recoveredEmail: user?.email,
+      userImage: user?.photoURL,
+      title,
+      thumbnail,
+      owner: name,
+      category,
+      lostDate,
+    };
+    try {
+      await axiosUrl.post(`/addData`, dataInfo).then(() => {
+        setLoad(!load);
         Swal.fire({
           position: "top-end",
           icon: "success",
           title: "Your Information Saved SuccessFully",
           showConfirmButton: false,
-          timer: 1500
+          timer: 1500,
         });
-      })
-    }
-    catch(err){
+      });
+    } catch (err) {
       Swal.fire(`${err}`);
     }
-   
-  }
+  };
 
   return (
-    <div className="lg:max-w-[1100px] flex gap-8 flex-col lg:flex-row mx-auto bg-white p-2 md:p-8 py-12 md:py-16">
+    <div className="lg:max-w-[1300px] min-h-[60vh] flex gap-8 flex-col lg:flex-row mx-auto bg-white p-2 md:p-8 py-12 md:py-16">
       {/* img */}
       <div className="lg:w-1/2">
-        <img src={thumbnail} alt="" className="w-full rounded-lg h-full object-cover" />
+        <img
+          src={thumbnail}
+          alt=""
+          className="w-full rounded-lg h-full object-cover"
+        />
       </div>
+      <div className="border-r-2 px-6"></div>
       {/* text */}
-      <div className="lg:w-1/2">
-        <div className="flex justify-between mb-3">
-          <p>
-            <span className="font-bold">Lost Date: </span>
-            <span className="text-gray-600">
-              {format(new Date(lostDate), "PP")}
-            </span>
-          </p>
-          <p>
-            <span className="font-bold">Posted On: </span>
-            <span className="text-gray-600">
-              {format(new Date(postedDate), "PP")}
-            </span>
+      <div className="lg:w-1/2 flex flex-col ">
+        <div className="flex-1 mb-6 lg:mb-2">
+          <div className="flex justify-between mb-5">
+            <p>
+              <span className="font-bold">Lost Date: </span>
+              <span className="text-gray-600">
+                {format(new Date(lostDate), "PP")}
+              </span>
+            </p>
+            <p>
+              <span className="font-bold">Posted On: </span>
+              <span className="text-gray-600">
+                {format(new Date(postedDate), "PP")}
+              </span>
+            </p>
+          </div>
+          <h3 className="text-2xl font-bold mb-5">{title}</h3>
+          <div className="flex justify-between mb-6">
+            <p>
+              <span className="font-bold">Status: </span>
+              <span
+                className={`${
+                  status === "recovered"
+                    ? "text-green-600 font-semibold"
+                    : "text-gray-600"
+                }`}
+              >
+                {status}
+              </span>
+            </p>
+            <p>
+              <span className="font-bold">Category: </span>
+              <span className="text-gray-600">{category}</span>
+            </p>
+          </div>
+          <p className="mb-6">{description}</p>
+          <div className="flex justify-between mb-3">
+            <p>
+              <span className="font-bold">Name: </span>
+              <span className="text-gray-600">{name}</span>
+            </p>
+            <p>
+              <span className="font-bold">Email: </span>
+              <span className="text-gray-600">{email}</span>
+            </p>
+          </div>
+          <p className="mb-4">
+            <span className="font-bold">Location: </span>
+            <span className="text-gray-600">{location}</span>
           </p>
         </div>
-        <h3 className="text-2xl font-bold mb-4">{title}</h3>
-        <div className="flex justify-between mb-3">
-          <p>
-            <span className="font-bold">Status: </span>
-            <span
-              className={`${
-                status === "recovered"
-                  ? "text-green-600 font-semibold"
-                  : "text-gray-600"
-              }`}
-            >
-              {status}
-            </span>
-          </p>
-          <p>
-            <span className="font-bold">Category: </span>
-            <span className="text-gray-600">{category}</span>
-          </p>
-        </div>
-        <p className="mb-3">{description}</p>
-        <div className="flex justify-between mb-3">
-          <p>
-            <span className="font-bold">Name: </span>
-            <span className="text-gray-600">{name}</span>
-          </p>
-          <p>
-            <span className="font-bold">Email: </span>
-            <span className="text-gray-600">{email}</span>
-          </p>
-        </div>
-        <p className="mb-4">
-          <span className="font-bold">Location: </span>
-          <span className="text-gray-600">{location}</span>
-        </p>
+
         {status === "found" && (
           <button
             onClick={() => document.getElementById("my_modal_5").showModal()}
@@ -146,7 +150,9 @@ const CardDetails = ({ post , setLoad, load}) => {
       {/* modal */}
       <dialog id="my_modal_5" className="modal  modal-bottom sm:modal-middle">
         <div className="modal-box ">
-            <h3 className="text-xl font-bold text-center my-4">Give Your Information</h3>
+          <h3 className="text-xl font-bold text-center my-4">
+            Give Your Information
+          </h3>
           <div className="p-6">
             <form onSubmit={submitFormHandler} className="flex flex-col gap-4">
               <div className="form-control w-full">
@@ -155,7 +161,7 @@ const CardDetails = ({ post , setLoad, load}) => {
                 </label>
                 <input
                   type="text"
-                  onChange={(e)=>setpickLocation(e.target.value)}
+                  onChange={(e) => setpickLocation(e.target.value)}
                   name="location"
                   placeholder="where the item was lost"
                   className="input rounded-lg input-bordered input-primary"
@@ -210,15 +216,17 @@ const CardDetails = ({ post , setLoad, load}) => {
                   required
                 />
               </div>
-              
-              <button 
-              onClick={() => {
-                pickLocation?
-                document.getElementById("my_modal_5").close():''
-              }}
-              className="w-full my-6 rounded-lg bg-blue-600 text-white py-3 px-6">
-                Submit</button>
-              
+
+              <button
+                onClick={() => {
+                  pickLocation
+                    ? document.getElementById("my_modal_5").close()
+                    : "";
+                }}
+                className="w-full my-6 rounded-lg bg-blue-600 text-white py-3 px-6"
+              >
+                Submit
+              </button>
             </form>
           </div>
         </div>
@@ -227,12 +235,10 @@ const CardDetails = ({ post , setLoad, load}) => {
   );
 };
 
-CardDetails.propTypes={
-  post:PropTypes.object,
-  load:PropTypes.bool,
-  setLoad:PropTypes.func
-}
+CardDetails.propTypes = {
+  post: PropTypes.object,
+  load: PropTypes.bool,
+  setLoad: PropTypes.func,
+};
 
 export default CardDetails;
-
-

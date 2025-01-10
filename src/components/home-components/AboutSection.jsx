@@ -15,6 +15,7 @@ const AboutSection = () => {
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
         backgroundPosition: "center",
+        backgroundAttachment:"fixed"
       }}
       className="p-4 min-h-[100vh] lg:min-h-[60vh] flex justify-center items-center md:p-10 mb-20 lg:mb-28"
     >
