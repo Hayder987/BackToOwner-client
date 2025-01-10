@@ -10,6 +10,7 @@ const AuthProvider = ({children}) => {
     const [user, setUser]= useState()
     const [loading, setLoading] = useState(true)
     const googleProvider = new GoogleAuthProvider();
+    
 
     const registerUser =(email, password)=>{
         setLoading(true)
@@ -43,6 +44,18 @@ const AuthProvider = ({children}) => {
           .then(()=>{
             setLoading(false)
           })
+
+          const date = new Date();
+
+         axios.post(`${import.meta.env.VITE_serverUrl}/user`,{
+          ...user, 
+          name: user?.displayName,
+          photo: user?.photoURL,
+          verify: user?.emailVerified,
+          role:"client",
+          date, 
+         })
+
         }
         else{
           axios.post(`${import.meta.env.VITE_serverUrl}/logOut`,{},
@@ -63,7 +76,7 @@ const AuthProvider = ({children}) => {
        return signOut(auth)
     }
 
-
+   console.log(user)
     const authInfo ={
         user,
         loading,
@@ -73,6 +86,8 @@ const AuthProvider = ({children}) => {
         googleLogin,
         userLogOut
     }
+
+  
 
 
 

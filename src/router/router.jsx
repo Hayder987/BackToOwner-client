@@ -12,6 +12,10 @@ import PrivateRoute from "../private/PrivateRoute";
 import DetailsPAge from "../pages/DetailsPAge";
 import UpdatePage from "../pages/UpdatePage";
 import FaqPage from "../pages/FaqPage";
+import Dashboard from "../pages/Dashboard";
+import AllItems from "../pages/dashBoard/AllItems";
+import AllUser from "../pages/dashBoard/AllUser";
+import AllRecoveredItem from "../pages/dashBoard/AllRecoveredItem";
 
 
 const router = createBrowserRouter([
@@ -31,8 +35,14 @@ const router = createBrowserRouter([
             {path:'/addlostfound', element:<PrivateRoute><AddLostAndFound></AddLostAndFound></PrivateRoute>},
             {path:'/managemyitem', element:<PrivateRoute><ManageMyItem></ManageMyItem></PrivateRoute> },
             {path:'/updateItems/:id', element: <PrivateRoute><UpdatePage></UpdatePage></PrivateRoute>},
-            {path:'/allrecovered', element:<PrivateRoute><AllRecovered></AllRecovered></PrivateRoute>}
-            
+            {path:'/allrecovered', element:<PrivateRoute><AllRecovered></AllRecovered></PrivateRoute>},
+            {path:'dashboard', element:<Dashboard></Dashboard>,
+                children:[
+                    {path:'allItems', element:<AllItems></AllItems>},
+                    {path:'allRecoverd', element:<AllRecoveredItem></AllRecoveredItem>},
+                    {path:'allUser', element:<AllUser></AllUser>}
+                ]
+            }
 
         ]
     }

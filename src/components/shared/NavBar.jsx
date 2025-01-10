@@ -11,6 +11,7 @@ import { useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 import { useTranslation } from "react-i18next";
 import { FaQuestion } from "react-icons/fa";
+import { MdDashboard } from "react-icons/md";
 
 
 const NavBar = () => {
@@ -103,7 +104,7 @@ const NavBar = () => {
         </div>
         {/* desktop */}
         <div className="flex justify-center items-center gap-4">
-          <ul className="hidden lg:flex justify-center items-center gap-10 font-medium">
+          <ul className="hidden lg:flex justify-center items-center gap-6 font-medium">
             <NavLink to="/">
               <li className="flex items-center gap-1">
                 <span>
@@ -127,6 +128,14 @@ const NavBar = () => {
                 </span>{" "}
                 FAQs
               </li>
+            </NavLink>
+            <NavLink to="dashboard">
+              <button className="flex items-center gap-1">
+                <span>
+                <MdDashboard />
+                </span>{" "}
+                Dashboard
+              </button>
             </NavLink>
           </ul>
           {loading ? (
