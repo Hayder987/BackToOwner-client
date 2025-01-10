@@ -1,5 +1,5 @@
 import { Link, NavLink } from "react-router";
-import logo from "../../assets/images/logo2.png";
+import logo from "../../assets/images/logo3.jpg";
 import { LuLogOut } from "react-icons/lu";
 import { IoHome } from "react-icons/io5";
 import { SiIconfinder } from "react-icons/si";
@@ -10,8 +10,7 @@ import { AiOutlineMenuFold } from "react-icons/ai";
 import { useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 import { useTranslation } from "react-i18next";
-import usaLogo from "../../assets/logo/usaLogo.png";
-import BanLogo from "../../assets/logo/usaLogo.png";
+
 
 const NavBar = () => {
   const { user, userLogOut, loading } = useAuth();
