@@ -28,7 +28,7 @@ const Register = () => {
     },
   };
 
-  const registerFormHandler = (e) => {
+  const registerFormHandler = async(e) => {
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
@@ -51,28 +51,26 @@ const Register = () => {
       setErrorMessage("Password must be 1 LowerCase");
       return;
     }
-
-    registerUser(email, password)
-      .then(() => {
-        updateUser(name, imgPath);
-
-        Swal.fire({
-          position: "top-middle",
-          icon: "success",
-          title: "User Registration SuccessFully!",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        form.reset();
-        navigate(destination);
-      })
-      .catch((err) => {
-        Swal.fire({
-          title: err.message,
-          icon: "error",
-          draggable: true,
-        });
+    try{
+      await registerUser(email, password)
+      await updateUser(name, imgPath);
+      Swal.fire({
+        position: "top-middle",
+        icon: "success",
+        title: "User Registration SuccessFully!",
+        showConfirmButton: false,
+        timer: 1500,
       });
+      form.reset();
+      navigate(destination);
+    }
+    catch(err){
+      Swal.fire({
+        title: err.message,
+        icon: "error",
+        draggable: true,
+      });
+    }
   };
 
   const googleLoginHandler = () => {

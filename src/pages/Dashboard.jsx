@@ -2,9 +2,18 @@ import { NavLink, Outlet } from "react-router";
 import logo from "../assets/images/logo3.jpg";
 import { RiMenuUnfoldLine } from "react-icons/ri";
 import { useState } from "react";
+import useAuth from "../hooks/useAuth";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const Dashboard = () => {
   const [sideMenu, setSideMenu] = useState(false)
+  const {user}= useAuth();
+  const axiosUrl = useAxiosSecure()
+
+  const updateRoleHandler = async()=>{
+      axiosUrl.patch(`/userRole/${user?.email}?role=requested`)  
+  }
+
   return (
     <div className="py-12">
       <div className="container relative flex min-h-[calc(100vh-140px)] gap-6 mx-auto bg-white p-6 py-12 lg:py-6">
@@ -36,11 +45,13 @@ const Dashboard = () => {
             </ul>
           </div>
           <div className="mt-10">
-            <button className="bg-white p-2 px-4 text-start rounded-lg text-xl font-medium w-full">Request For Admin</button>
+            <button
+            onClick={updateRoleHandler}
+             className="bg-white p-2 px-4 text-start rounded-lg text-xl font-medium w-full">Request For Admin</button>
           </div>
         </div>
         {/* mobile */}
-        <div className={`w-8/12 flex flex-col lg:hidden  duration-300  ${sideMenu?"left-0 absolute top-10": "-left-96 absolute top-10"} h-full  lg:w-3/12 p-3 rounded-lg bg-blue-100`}>
+        <div className={`w-8/12 flex flex-col lg:hidden  duration-300  ${sideMenu?"left-0 z-10 bg-blue-100 absolute top-10": "-left-[600px] absolute top-10"} h-full  lg:w-3/12 p-3 rounded-lg bg-blue-100`}>
           <div className=" flex justify-start items-center gap-2 ">
             <img
               src={logo}
@@ -58,7 +69,7 @@ const Dashboard = () => {
           </div>
         </div>
         {/* content */}
-        <div className="w-full lg:w-9/12">
+        <div className="w-full lg:w-9/12 p-6 md:p-10">
         <Outlet></Outlet>
         </div>
       </div>

@@ -49,9 +49,9 @@ const AuthProvider = ({children}) => {
 
          axios.post(`${import.meta.env.VITE_serverUrl}/user`,{
           ...user, 
-          name: user?.displayName,
-          photo: user?.photoURL,
-          verify: user?.emailVerified,
+          name: currentUser?.displayName,
+          photo: currentUser?.photoURL,
+          verify: currentUser?.emailVerified,
           role:"client",
           date, 
          })
@@ -71,12 +71,14 @@ const AuthProvider = ({children}) => {
       }
     },[])
 
+
+
     const userLogOut = ()=>{
       setLoading(true)
        return signOut(auth)
     }
+    console.log(user)
 
-   console.log(user)
     const authInfo ={
         user,
         loading,
