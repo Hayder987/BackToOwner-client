@@ -9,6 +9,7 @@ import useAxiosSecure from "../hooks/useAxiosSecure";
 import { Helmet } from "react-helmet";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
+import { uploadImage } from "../api/utilities";
 
 const UpdatePage = () => {
   const { id } = useParams();
@@ -19,6 +20,9 @@ const UpdatePage = () => {
   const navigate = useNavigate()
   const { t } = useTranslation();
   const axiosUrl = useAxiosSecure()
+  const [imgPath, setImgPath] = useState(null)
+  const [imgLoading, setImgLoading] = useState(false)
+  const [imgPreview, setImgPreview] = useState('')
 
 
   useEffect(() => {
@@ -34,6 +38,14 @@ const UpdatePage = () => {
     fetchData();
   }, [post?.lostDate, id, axiosUrl]);
 
+  useEffect(() => {
+    if (imgPath) {
+      const imageURL = URL.createObjectURL(imgPath);
+      setImgPreview(imageURL);
+      return () => URL.revokeObjectURL(imageURL);
+    }
+  }, [imgPath, setImgPreview]);
+
  
   const updateFormHandler = async (e) => {
     e.preventDefault();
@@ -45,7 +57,14 @@ const UpdatePage = () => {
     const location = form.location.value;
     const name = form.name.value;
     const email = form.email.value;
+    setImgLoading(true)
+   let photo = null
 
+   if(imgPath){
+     photo = await uploadImage(imgPath)
+   }
+   
+   
     const updateData = {
       title,
       status: type,
@@ -55,7 +74,7 @@ const UpdatePage = () => {
       name,
       email,
       lostDate: startDate,
-      thumbnail:   ""
+      thumbnail: imgPath?photo: post?.thumbnail
     };
 
 
@@ -70,6 +89,7 @@ const UpdatePage = () => {
           timer: 1500,
         });
         form.reset();
+        setImgLoading(false)
         navigate('/managemyitem')
       })
       .catch((err) => {
@@ -108,17 +128,23 @@ const UpdatePage = () => {
                 />
               </div>
               <div className="form-control w-full">
-                <label className="label">
-                  <span className="label-text">{t('upload')}</span>
-                </label>
-                <div className="flex flex-col lg:flex-row gap-4">
-                  <input
+              <div className="form-control w-full">
+                <label className=" flex justify-start flex-col">
+                <div className="border-dashed p-1 rounded-lg mt-8 border-2 border-blue-600">
+                   <p className="cursor-pointer text-center bg-blue-600 rounded-lg text-white p-2">
+                    Upload Image
+                   </p>
+                 </div>
+                    <input
                     type="file"
+                    name="img"
                     accept="image/*"
-                    // onChange={handleImageChange}
-                    className="file-input file-input-primary w-full "
+                    onChange={(e)=> setImgPath(e.target.files[0])}
+                    className="file-input hidden file-input-primary w-full "
                   />
-                </div>
+                </label>
+                
+              </div>
               </div>
             </div>
             <div className="flex flex-col md:flex-row justify-center gap-6">
@@ -217,18 +243,18 @@ const UpdatePage = () => {
                 />
               </div>
             </div>
-
+            <p className="text-center text-blue-600">{imgLoading? "Uploading....": ""}</p>
             <input
               type="submit"
               value={`${t('updateBtn')}`}
-              className="w-full rounded-lg bg-blue-600 text-white py-3 px-6"
+              className="w-full cursor-pointer rounded-lg bg-blue-600 text-white py-3 px-6"
             />
           </form>
         </div>
         {/* banner */}
         <div className="w-full hidden lg:flex lg:w-5/12">
           <img
-            src={ post?.thumbnail}
+            src={imgPath?imgPreview : post?.thumbnail}
             alt=""
             className="w-full h-[100%] rounded-lg "
           />

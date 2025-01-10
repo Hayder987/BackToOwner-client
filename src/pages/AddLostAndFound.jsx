@@ -1,7 +1,7 @@
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import banner from '../assets/images/addbanner-2.jpg'
+import banner from '../assets/images/loastBanner2.png'
 import useAuth from "../hooks/useAuth";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../hooks/useAxiosSecure";
