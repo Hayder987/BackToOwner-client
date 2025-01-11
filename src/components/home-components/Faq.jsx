@@ -8,7 +8,7 @@ const Faq = () => {
   return (
     <div className="container mx-auto mb-20 lg:mb-28 rounded-lg overflow-hidden bg-white px-6 py-10">
       {/* faq section */}
-      <div className="flex flex-col lg:flex-row gap-10">
+      <div className="flex flex-col overflow-hidden lg:flex-row gap-10">
         {/* img */}
         <motion.div 
          whileInView={{ x: [-200, 0],  }}

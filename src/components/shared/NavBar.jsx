@@ -51,9 +51,9 @@ const NavBar = () => {
           <img
             src={logo}
             alt=""
-            className="w-8 h-8 md:w-16 md:h-16  rounded-full"
+            className="w-10 h-10 md:w-16 md:h-16  rounded-full"
           />
-          <h1 className="text-base md:text-3xl font-bold">
+          <h1 className="text-base hidden md:text-3xl md:flex font-bold">
             <span className="text-blue-600">Back</span>ToOwner
           </h1>
         </div>
@@ -205,7 +205,7 @@ const NavBar = () => {
                 ) : (
                   <div className="">
                     <Link to="/login">
-                      <button className="py-3 flex items-center gap-2 px-5 rounded-lg bg-blue-600 text-white font-semibold">
+                      <button className="py-1 md:py-3 flex items-center gap-2 px-3 md:px-5 rounded-lg bg-blue-600 text-white font-semibold">
                         <span className="text-xl">
                           <FiLogIn />
                         </span>
@@ -219,7 +219,7 @@ const NavBar = () => {
                 <select
                   onChange={(e) => changeLanguage(e.target.value)}
                   defaultValue={i18n.language}
-                  className="border rounded-lg outline-none font-semibold bg-transparent border-blue-600  p-1 md:p-3 "
+                  className="border rounded-lg outline-none font-semibold bg-transparent border-blue-600  p-2 md:p-3 "
                 >
                   <option value="en">English</option>
                   <option value="bn">বাংলা</option>

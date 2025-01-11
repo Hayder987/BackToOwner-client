@@ -21,7 +21,7 @@ const AboutSection = () => {
     >
       <div className="container gap-12 flex flex-col lg:flex-row mx-auto ">
         {/* text */}
-        <div className="lg:w-1/2 flex justify-center items-center">
+        <div className="lg:w-1/2 overflow-hidden flex justify-center items-center">
           <div className="">
             <motion.h1 
             whileInView={{ y: [100, 0], color: ["#07f1dc", "#0775f1"] }}

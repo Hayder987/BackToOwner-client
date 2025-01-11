@@ -19,8 +19,9 @@ const Dashboard = () => {
 
 
   const updateRoleHandler = async () => {
-    axiosUrl.patch(`/userRole/${user?.email}?role=requested`);
+    await axiosUrl.patch(`/userRole/${user?.email}?role=requested`);
     refetch();
+    
   };
 
   return (
@@ -34,7 +35,7 @@ const Dashboard = () => {
         {/* aside */}
         {/* desktop */}
         <div
-          className={`min-h-full hidden lg:flex lg:flex-col  lg:w-3/12 p-3 rounded-lg bg-blue-100`}
+          className={`min-h-full hidden lg:flex  py-10 lg:flex-col  lg:w-3/12 p-3 rounded-lg bg-blue-100`}
         >
           <div className=" mb-16 flex justify-start items-center gap-2 ">
             <img
@@ -62,7 +63,7 @@ const Dashboard = () => {
             </div>
           ) : (
             <div className="">
-              <p className="">for Admin Access</p>
+              <p className="text-xl mb-4">for Admin Access</p>
               <p className="">
                 <span className="">email: hdradmin@gmail.com</span> <br />
                 <span className="">Pass: Admin123</span>
@@ -130,7 +131,7 @@ const Dashboard = () => {
             </div>
           ) : (
             <div className="">
-              <p className="">for Admin Access</p>
+              <p className="text-xl mb-4">for Admin Access</p>
               <p className="">
                 <span className="">email: hdradmin@gmail.com</span> <br />
                 <span className="">Pass: Admin123</span>
