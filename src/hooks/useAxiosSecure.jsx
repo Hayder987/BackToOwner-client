@@ -1,7 +1,6 @@
 import axios from "axios";
-import { useEffect } from "react";
-import useAuth from "./useAuth";
 import { useNavigate } from "react-router";
+import useAuth from "./useAuth";
 import Swal from "sweetalert2";
 
 const axiosInstance = axios.create({
@@ -10,26 +9,25 @@ const axiosInstance = axios.create({
 });
 
 const useAxiosSecure = () => {
-  const { userLogOut } = useAuth();
   const navigate = useNavigate()
-  useEffect(() => {
-    axiosInstance.interceptors.response.use(
-      (response) => {
-        return response;
-      },
-      (error) => {
-        if (error.status === 401 || error.status === 403) {
-         navigate('/')
-         Swal.fire({
-          title: "UnAuthorized",
-          text: "You need Logout And Login First",
-          icon: "error"
-        });
-        }
-        return Promise.reject(error);
+  const {userLogOut} = useAuth()
+  axiosInstance.interceptors.response.use(
+    (response) => {
+      return response;
+    },
+    async (error) => {
+      if (error.status === 401 || error.status === 403) {
+      await  navigate('/')
+      await userLogOut()
+      Swal.fire({
+        title: "UnAuthorized Access",
+        text: "You get Logout ",
+        icon: "error"
+      });
       }
-    );
-  }, [userLogOut, navigate]);
+      return Promise.reject(error);
+    }
+  );
   return axiosInstance;
 };
 

@@ -32,22 +32,21 @@ const AuthProvider = ({children}) => {
     }
 
     useEffect(()=>{
-      const unsubsCribe = onAuthStateChanged(auth,(currentUser)=>{
-        setUser(currentUser)
+      const unsubsCribe = onAuthStateChanged(auth, async(currentUser)=>{
+         setUser(currentUser)
         if(currentUser?.email){
           const user ={
             email: currentUser?.email
           }
-          axios.post(`${import.meta.env.VITE_serverUrl}/jwt`,user,
+          await axios.post(`${import.meta.env.VITE_serverUrl}/jwt`,user,
             {withCredentials:true}
           )
           .then(()=>{
             setLoading(false)
           })
 
-          const date = new Date();
-
-         axios.post(`${import.meta.env.VITE_serverUrl}/user`,{
+         const date = new Date();
+        await axios.post(`${import.meta.env.VITE_serverUrl}/user`,{
           ...user, 
           name: currentUser?.displayName,
           photo: currentUser?.photoURL,
@@ -58,7 +57,7 @@ const AuthProvider = ({children}) => {
 
         }
         else{
-          axios.post(`${import.meta.env.VITE_serverUrl}/logOut`,{},
+         await axios.post(`${import.meta.env.VITE_serverUrl}/logOut`,{},
             {withCredentials:true}
           )
           setLoading(true) 
