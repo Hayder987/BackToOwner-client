@@ -7,7 +7,7 @@ import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { FiLogIn } from "react-icons/fi";
 import { AiOutlineMenuFold } from "react-icons/ai";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 import { useTranslation } from "react-i18next";
 import { FaQuestion } from "react-icons/fa";
@@ -16,6 +16,17 @@ import { MdDashboard } from "react-icons/md";
 const NavBar = () => {
   const { user, userLogOut, loading } = useAuth();
   const [menu, setMenu] = useState(false);
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem("theme") === "true";
+  });
+  
+  useEffect(() => {
+    localStorage.setItem("theme", theme); 
+  }, [theme]);
+  
+  const themeHandle = () => {
+    setTheme((prevTheme) => !prevTheme); 
+  };
 
   // translation function
   const { t, i18n } = useTranslation();
@@ -231,6 +242,7 @@ const NavBar = () => {
                 <input
                   type="checkbox"
                   className="theme-controller"
+                  onChange={themeHandle}
                   value="synthwave"
                 />
 
