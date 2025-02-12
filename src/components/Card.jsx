@@ -28,7 +28,7 @@ const Card = ({ post , theme}) => {
       {/* text */}
       <div className="w-1/2 flex flex-col">
         <div className="flex-1">
-          <p className="text-sm font-semibold mb-2 text-gray-700">
+          <p className={`${theme?'text-gray-300':'text-gray-700'}text-sm font-semibold mb-2`}>
             Lost Date: {format(new Date(lostDate), "PP")}
           </p>
           <h3 className="font-bold mb-2">{title}</h3>

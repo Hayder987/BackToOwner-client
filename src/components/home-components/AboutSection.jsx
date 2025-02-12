@@ -41,7 +41,7 @@ const AboutSection = () => {
             whileInView={{ x: [-150, 0],  }}
             transition={{ duration: 1 }}
             viewport={{ once: false, amount: 0.5 }}
-            className="mb-6">
+            className={`mb-6 text-gray-600`}>
               {t('aboutDescription2')}
             </motion.p>
             <Link to='/addlostfound'><motion.button 
