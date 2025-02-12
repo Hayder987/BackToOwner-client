@@ -12,10 +12,12 @@ import { RxCross2 } from "react-icons/rx";
 import { useTranslation } from "react-i18next";
 import { FaQuestion } from "react-icons/fa";
 import { MdDashboard } from "react-icons/md";
+import { useTheme } from "../../hooks/useTheme";
 
 const NavBar = () => {
   const { user, userLogOut, loading } = useAuth();
   const [menu, setMenu] = useState(false);
+  const {theme, setTheme} = useTheme()
 
   const { t, i18n } = useTranslation();
   const changeLanguage = async (lang) => {
@@ -229,6 +231,7 @@ const NavBar = () => {
                 {/* This hidden checkbox controls the state */}
                 <input
                   type="checkbox"
+                  onChange={()=>setTheme(!theme)}
                   className="theme-controller"
                   value="synthwave"
                 />
