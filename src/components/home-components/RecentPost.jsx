@@ -28,7 +28,7 @@ const RecentPost = ({ postData, loading }) => {
           viewport={{ once: false, amount: 0.5 }}
            className="grid p-2 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {postData.map((post) => (
-              <Card key={post._id} post={post}></Card>
+              <Card key={post._id} theme={theme} post={post}></Card>
             ))}
           </motion.div>
           <div className="flex justify-center items-center mt-8">

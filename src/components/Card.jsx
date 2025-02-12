@@ -3,7 +3,7 @@ import { Link } from "react-router";
 import { motion } from "motion/react";
 import { useTranslation } from "react-i18next";
 
-const Card = ({ post }) => {
+const Card = ({ post , theme}) => {
   const { t } = useTranslation();
 
   const { _id, title, description, location, lostDate, thumbnail, status } =
@@ -14,7 +14,7 @@ const Card = ({ post }) => {
       whileInView={{ scale: [0, 1] }}
       transition={{ duration: 1 }}
       viewport={{ once: false, amount: 0.5 }}
-      className="flex justify-center group gap-4  border p-3 shadow-md rounded-lg"
+      className={`flex justify-center group gap-4  ${theme?"border-gray-600 border":'border'} p-3 shadow-md rounded-lg`}
     >
       {/* img */}
       <div className="w-1/2 overflow-hidden rounded-lg">
