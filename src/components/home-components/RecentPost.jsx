@@ -4,16 +4,18 @@ import LoaderSpinner from "../LoaderSpinner";
 import { Link } from "react-router";
 import { motion } from "motion/react";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "../../hooks/useTheme";
 
 const RecentPost = ({ postData, loading }) => {
   const {t } = useTranslation();
+  const {theme} = useTheme()
 
   return (
     <div className="my-20 lg:my-28">
       <h1 className="text-center text-2xl md:text-4xl font-bold mb-6 ">
         {t('recenth1')}
       </h1>
-      <p className="md:text-xl text-center font-semibold mb-12 lg:mb-12 text-gray-600">
+      <p className={`md:text-xl text-center font-semibold mb-12 lg:mb-12 ${theme?'text-gray-100':"text-gray-600"}`}>
         {t('recentdesc')}
       </p>
       {loading ? (
