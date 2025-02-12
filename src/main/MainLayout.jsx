@@ -7,7 +7,7 @@ import { useTheme } from "../hooks/useTheme";
 const MainLayout = () => {
      const {theme} = useTheme()
     return (
-        <div className={`${theme?"bg-gray-900 text-gray-100": "bg-slate-100 text-black"}`}>
+        <div className={`${theme?"bg-gray-900 text-gray-100": "bg-slate-50 text-black"}`}>
            <NavBar></NavBar> 
            <div className="min-h-[calc(100vh-90px)]">
             <Outlet></Outlet>
